@@ -6,8 +6,8 @@ quality.  With PyMuPDF you therefore can also access files with extensions\
 *.pdf, *.xps, *.oxps, *.epub, *.cbz or *.fb2 from your Python scripts.
 
 Name:           python-%{pypi_name}
-Version:        1.13.13
-Release:        2%{?dist}
+Version:        1.13.14
+Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 # PyMuPDF itself is GPLv3+.  MuPDF (statically linked) is AGPLv3+.
@@ -73,6 +73,9 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %doc demo doc/PyMuPDF.pdf examples README.md
 
 %changelog
+* Fri Jul 20 2018 Scott Talbert <swt@techie.net> - 1.13.14-1
+- New upstream release 1.13.14
+
 * Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.13.13-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
