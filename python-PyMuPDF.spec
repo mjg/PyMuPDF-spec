@@ -7,7 +7,7 @@ quality.  With PyMuPDF you therefore can also access files with extensions\
 
 Name:           python-%{pypi_name}
 Version:        1.13.20
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 # PyMuPDF itself is GPLv3+.  MuPDF (statically linked) is AGPLv3+.
@@ -17,20 +17,18 @@ Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
 # Can be removed if mupdf provides a shared library
 Patch0:         fix-library-linking.patch
 
-BuildRequires:  python2-devel python3-devel
+BuildRequires:  python3-devel
 BuildRequires:  gcc
-BuildRequires:  zlib-devel mupdf-static
+BuildRequires:  zlib-devel
+BuildRequires:  mupdf-static
 # Can be removed if mupdf provides a shared library
-BuildRequires:  libjpeg-devel openjpeg2-devel jbig2dec-devel freetype-devel harfbuzz-devel
+BuildRequires:  libjpeg-devel
+BuildRequires:  openjpeg2-devel
+BuildRequires:  jbig2dec-devel
+BuildRequires:  freetype-devel
+BuildRequires:  harfbuzz-devel
 
 %description
-%{desc}
-
-%package -n     python2-%{pypi_name}
-Summary:        %{summary}
-%{?python_provide:%python_provide python2-%{pypi_name}}
-
-%description -n python2-%{pypi_name}
 %{desc}
 
 %package -n     python3-%{pypi_name}
@@ -51,18 +49,11 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %autosetup -n %{pypi_name}-%{version}
 
 %build
-%py2_build
 %py3_build
 
 %install
-%py2_install
 %py3_install
 
-
-%files -n python2-%{pypi_name}
-%license COPYING "GNU AFFERO GPL V3"
-%{python2_sitearch}/fitz/
-%{python2_sitearch}/PyMuPDF*
 
 %files -n python3-%{pypi_name}
 %license COPYING "GNU AFFERO GPL V3"
@@ -73,6 +64,10 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %doc demo doc/PyMuPDF.pdf examples README.md
 
 %changelog
+* Wed Oct 17 2018 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 1.13.20-2
+- Subpackage python2-PyMuPDF has been removed
+  See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
+
 * Fri Sep 14 2018 Scott Talbert <swt@techie.net> - 1.13.20-1
 - New upstream release 1.13.20
 
