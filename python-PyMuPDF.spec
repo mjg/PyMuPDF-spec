@@ -6,7 +6,7 @@ quality.  With PyMuPDF you therefore can also access files with extensions\
 *.pdf, *.xps, *.oxps, *.epub, *.cbz or *.fb2 from your Python scripts.
 
 Name:           python-%{pypi_name}
-Version:        1.14.10
+Version:        1.14.12
 Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
@@ -64,6 +64,9 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %doc demo doc/PyMuPDF.pdf examples README.md
 
 %changelog
+* Fri Mar 22 2019 Scott Talbert <swt@techie.net> - 1.14.12-1
+- New upstream release 1.14.12
+
 * Tue Mar 12 2019 Scott Talbert <swt@techie.net> - 1.14.10-1
 - New upstream release 1.14.10
 
