@@ -7,7 +7,7 @@ quality.  With PyMuPDF you therefore can also access files with extensions\
 
 Name:           python-%{pypi_name}
 Version:        1.14.14
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 # PyMuPDF itself is GPLv3+.  MuPDF (statically linked) is AGPLv3+.
@@ -54,6 +54,10 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %install
 %py3_install
 
+%check
+PYTHONPATH=%{buildroot}%{python3_sitearch} \
+  %{__python3} -c 'import sys; sys.path.remove(""); import fitz'
+
 
 %files -n python3-%{pypi_name}
 %license COPYING "GNU AFFERO GPL V3"
@@ -64,6 +68,9 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %doc demo doc/PyMuPDF.pdf examples README.md
 
 %changelog
+* Tue May 07 2019 Scott Talbert <swt@techie.net> - 1.14.14-2
+- Restore linking with harfbuzz (#1706753)
+
 * Thu Apr 18 2019 Scott Talbert <swt@techie.net> - 1.14.14-1
 - New upstream release 1.14.14
 
