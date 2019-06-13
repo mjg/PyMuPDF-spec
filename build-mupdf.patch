@@ -1,0 +1,15 @@
+diff -up PyMuPDF-1.14.14/setup.py.hack PyMuPDF-1.14.14/setup.py
+--- PyMuPDF-1.14.14/setup.py.hack	2019-06-11 20:32:16.337958762 -0400
++++ PyMuPDF-1.14.14/setup.py	2019-06-11 23:02:46.098909326 -0400
+@@ -10,8 +10,10 @@ if sys.platform.startswith("linux"):
+             "/usr/include/mupdf",
+             "/usr/local/include/mupdf",
+             "/usr/local/thirdparty/zlib",
++            "mupdf-1.14.0-source/install/include",
++            "mupdf-1.14.0-source/install/include/mupdf",
+         ],
+-        # library_dirs=['<mupdf_and_3rd_party_libraries_dir>'],
++        library_dirs=['mupdf-1.14.0-source/install/lib'],
+         libraries=[
+             "mupdf",
+             #'crypto', #openssl is required by mupdf on archlinux

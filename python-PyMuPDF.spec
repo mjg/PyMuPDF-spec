@@ -7,20 +7,23 @@ quality.  With PyMuPDF you therefore can also access files with extensions\
 
 Name:           python-%{pypi_name}
 Version:        1.14.14
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 # PyMuPDF itself is GPLv3+.  MuPDF (statically linked) is AGPLv3+.
 License:        GPLv3+ and AGPLv3+
 URL:            https://github.com/rk700/PyMuPDF
 Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
+Source1:        https://mupdf.com/downloads/archive/mupdf-1.14.0-source.tar.gz
 # Can be removed if mupdf provides a shared library
 Patch0:         fix-library-linking.patch
+Patch1:         build-mupdf.patch
+Patch2:         0001-fix-build-on-big-endian.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  gcc
 BuildRequires:  zlib-devel
-BuildRequires:  mupdf-static
+#BuildRequires:  mupdf-static
 # Can be removed if mupdf provides a shared library
 BuildRequires:  libjpeg-devel
 BuildRequires:  openjpeg2-devel
@@ -46,9 +49,38 @@ BuildArch:      noarch
 python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 
 %prep
-%autosetup -n %{pypi_name}-%{version}
+%autosetup -N -n %{pypi_name}-%{version}
+# TEMP build mupdf
+%setup -T -D -q -a 1 -n %{pypi_name}-%{version}
+%autopatch -p1
+cd mupdf-1.14.0-source
+for d in $(ls thirdparty | grep -v -e freeglut -e lcms2 -e mujs)
+do
+  rm -rf thirdparty/$d
+done
+#%patch0 -p1 -d thirdparty/lcms2
+echo > user.make "\
+  USE_SYSTEM_FREETYPE := yes
+  USE_SYSTEM_HARFBUZZ := yes
+  USE_SYSTEM_JBIG2DEC := yes
+  USE_SYSTEM_JPEGXR := yes # not used without HAVE_JPEGXR
+  USE_SYSTEM_LCMS2 := no # need lcms2-art fork
+  USE_SYSTEM_LIBJPEG := yes
+  USE_SYSTEM_MUJS := no # build needs source anyways
+  USE_SYSTEM_OPENJPEG := yes
+  USE_SYSTEM_ZLIB := yes
+  USE_SYSTEM_GLUT := no # need freeglut2-art frok
+  USE_SYSTEM_CURL := yes
+"
+cd -
 
 %build
+cd mupdf-1.14.0-source
+export XCFLAGS="%{optflags} -fPIC -DJBIG_NO_MEMENTO -DTOFU -DTOFU_CJK"
+make HAVE_X11=no HAVE_GLFW=no HAVE_GLUT=no prefix=$(pwd)/install %{?_smp_mflags}
+make HAVE_X11=no HAVE_GLFW=no HAVE_GLUT=no prefix=$(pwd)/install install
+unset XCFLAGS
+cd -
 %py3_build
 
 %install
@@ -68,6 +100,9 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} \
 %doc demo doc/PyMuPDF.pdf examples README.md
 
 %changelog
+* Wed Jun 12 2019 Scott Talbert <swt@techie.net> - 1.14.14-3
+- Temporarily build our own copy of mupdf to fix FTBFS (#1716518)
+
 * Tue May 07 2019 Scott Talbert <swt@techie.net> - 1.14.14-2
 - Restore linking with harfbuzz (#1706753)
 
