@@ -7,7 +7,7 @@ quality.  With PyMuPDF you therefore can also access files with extensions\
 
 Name:           python-%{pypi_name}
 Version:        1.14.20
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 # PyMuPDF itself is GPLv3+.  MuPDF (statically linked) is AGPLv3+.
@@ -101,6 +101,9 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} \
 %doc demo doc/PyMuPDF.pdf examples README.md
 
 %changelog
+* Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 1.14.20-2
+- Rebuilt for Python 3.8
+
 * Sat Aug 17 2019 Scott Talbert <swt@techie.net> - 1.14.20-1
 - Update to new upstream release 1.14.20 (#1742123)
 
