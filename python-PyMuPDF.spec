@@ -1,12 +1,7 @@
 %global pypi_name PyMuPDF
-%global desc This is PyMuPDF, a Python binding for MuPDF - a lightweight PDF and XPS\
-viewer.  MuPDF can access files in PDF, XPS, OpenXPS, epub, comic and fiction\
-book formats, and it is known for its top performance and high rendering\
-quality.  With PyMuPDF you therefore can also access files with extensions\
-*.pdf, *.xps, *.oxps, *.epub, *.cbz or *.fb2 from your Python scripts.
 
 Name:           python-%{pypi_name}
-Version:        1.17.1
+Version:        1.17.2
 Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
@@ -31,15 +26,20 @@ BuildRequires:  jbig2dec-devel
 BuildRequires:  freetype-devel
 BuildRequires:  harfbuzz-devel
 
-%description
-%{desc}
+%global _description %{expand:
+This is PyMuPDF, a Python binding for MuPDF - a lightweight PDF and XPS
+viewer.  MuPDF can access files in PDF, XPS, OpenXPS, epub, comic and fiction
+book formats, and it is known for its top performance and high rendering
+quality.  With PyMuPDF you therefore can also access files with extensions
+*.pdf, *.xps, *.oxps, *.epub, *.cbz or *.fb2 from your Python scripts.}
+
+%description %_description
 
 %package -n     python3-%{pypi_name}
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{pypi_name}}
 
-%description -n python3-%{pypi_name}
-%{desc}
+%description -n python3-%{pypi_name} %_description
 
 %package        doc
 Summary:        Documentation for python-%{pypi_name}
@@ -72,6 +72,9 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} \
 %doc demo docs_built/* README.md
 
 %changelog
+* Fri Jun 26 2020 Scott Talbert <swt@techie.net> - 1.17.2-1
+- Update to new upstream release 1.17.2 (#1850817)
+
 * Thu Jun 18 2020 Scott Talbert <swt@techie.net> - 1.17.1-1
 - Update to new upstream release 1.17.1 (#1848770)
 
