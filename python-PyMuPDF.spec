@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.17.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 # PyMuPDF itself is GPLv3+.  MuPDF (statically linked) is AGPLv3+.
@@ -72,6 +72,9 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} \
 %doc demo docs_built/* README.md
 
 %changelog
+* Fri Sep 18 2020 Michael J Gruber <mjg@fedoraproject.org> - 1.17.4-2
+- rebuild with jbig2dec 0.19
+
 * Tue Jul 28 2020 Scott Talbert <swt@techie.net> - 1.17.4-1
 - Update to new upstream release 1.17.4 (#1860498)
 
