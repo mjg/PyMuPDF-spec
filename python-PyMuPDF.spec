@@ -1,16 +1,15 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.17.4
-Release:        2%{?dist}
+Version:        1.18.0
+Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 # PyMuPDF itself is GPLv3+.  MuPDF (statically linked) is AGPLv3+.
 License:        GPLv3+ and AGPLv3+
 URL:            https://github.com/pymupdf/PyMuPDF
 Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
-# Can be removed if mupdf provides a shared library
-Patch0:         fix-library-linking.patch
+Patch0:         0001-build-against-system-gumbo-library-on-Fedora.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-sphinx
@@ -25,6 +24,7 @@ BuildRequires:  openjpeg2-devel
 BuildRequires:  jbig2dec-devel
 BuildRequires:  freetype-devel
 BuildRequires:  harfbuzz-devel
+BuildRequires:  gumbo-parser-devel
 
 %global _description %{expand:
 This is PyMuPDF, a Python binding for MuPDF - a lightweight PDF and XPS
@@ -72,6 +72,9 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} \
 %doc demo docs_built/* README.md
 
 %changelog
+* Thu Oct 08 2020 Michael J Gruber <mjg@fedoraproject.org> - 1.18.0-1
+- Update to new upstream release 1.18.0
+
 * Fri Sep 18 2020 Michael J Gruber <mjg@fedoraproject.org> - 1.17.4-2
 - rebuild with jbig2dec 0.19
 

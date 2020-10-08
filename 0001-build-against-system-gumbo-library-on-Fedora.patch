@@ -1,0 +1,27 @@
+From cab3826e2bac521ab331f298b2b15afdfedf6570 Mon Sep 17 00:00:00 2001
+Message-Id: <cab3826e2bac521ab331f298b2b15afdfedf6570.1602231804.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Fri, 9 Oct 2020 10:22:58 +0200
+Subject: [PATCH] build against system gumbo library on Fedora
+
+Signed-off-by: Michael J Gruber <mjg@fedoraproject.org>
+---
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 8b432b2..3753fb1 100644
+--- a/setup.py
++++ b/setup.py
+@@ -14,7 +14,7 @@ class build_ext_first(build_py_orig):
+ DEFAULT = ["mupdf", "mupdf-third"]
+ ARCH_LINUX = DEFAULT + ["jbig2dec", "openjp2", "jpeg", "freetype"]
+ OPENSUSE = ARCH_LINUX + ["harfbuzz", "png16"]
+-FEDORA = ARCH_LINUX + ["harfbuzz"]
++FEDORA = ARCH_LINUX + ["harfbuzz", "gumbo"]
+ LIBRARIES = {
+     "default": DEFAULT,
+     "arch": ARCH_LINUX,
+-- 
+2.28.0.945.gedc4c61efd
+
