@@ -1,0 +1,24 @@
+From d3c90a07e2f4eff64b18954e36efa45c05d89818 Mon Sep 17 00:00:00 2001
+From: Scott Talbert <swt@techie.net>
+Date: Mon, 26 Oct 2020 19:35:14 -0400
+Subject: [PATCH] Add include path for freetype on Linux
+
+---
+ setup.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/setup.py b/setup.py
+index 3753fb1..1561d97 100644
+--- a/setup.py
++++ b/setup.py
+@@ -54,6 +54,7 @@ if sys.platform.startswith("linux") or 'gnu' in sys.platform:
+         include_dirs=[  # we need the path of the MuPDF headers
+             "/usr/include/mupdf",
+             "/usr/local/include/mupdf",
++            "/usr/include/freetype2",
+         ],
+         libraries=load_libraries(),
+     )
+-- 
+2.26.2
+
