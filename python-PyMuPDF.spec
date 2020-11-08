@@ -1,7 +1,7 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.18.1
+Version:        1.18.2
 Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
@@ -9,7 +9,6 @@ Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 License:        GPLv3+ and AGPLv3+
 URL:            https://github.com/pymupdf/PyMuPDF
 Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
-Patch0:         0001-Add-include-path-for-freetype-on-Linux.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-sphinx
@@ -72,6 +71,9 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} \
 %doc demo docs_built/* README.md
 
 %changelog
+* Sun Nov  8 09:38:33 EST 2020 Scott Talbert <swt@techie.net> - 1.18.1-2
+- Update to new upstream release 1.18.2 (#1892160)
+
 * Mon Oct 26 2020 Scott Talbert <swt@techie.net> - 1.18.1-1
 - Update to new upstream release 1.18.1 (#1889179)
 
