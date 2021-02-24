@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.18.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 # PyMuPDF itself is GPLv3+.  MuPDF (statically linked) is AGPLv3+.
@@ -71,6 +71,9 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} \
 %doc demo docs_built/* README.md
 
 %changelog
+* Wed Feb 24 2021 Michael J Gruber <mjg@fedoraproject.org> - 1.18.8-2
+- rebuild for mupdf CVE-2021-3407
+
 * Sat Feb 06 2021 Scott Talbert <swt@techie.net> - 1.18.8-1
 - Update to new upstream release 1.18.8 (#1924379)
 
