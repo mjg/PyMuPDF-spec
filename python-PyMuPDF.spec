@@ -1,12 +1,11 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.18.8
-Release:        2%{?dist}
+Version:        1.18.10
+Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
-# PyMuPDF itself is GPLv3+.  MuPDF (statically linked) is AGPLv3+.
-License:        GPLv3+ and AGPLv3+
+License:        AGPLv3+
 URL:            https://github.com/pymupdf/PyMuPDF
 Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
 
@@ -56,6 +55,7 @@ sphinx-build docs docs_built
 
 %install
 %py3_install
+rm -f %{buildroot}%{_prefix}/README.md
 
 %check
 PYTHONPATH=%{buildroot}%{python3_sitearch} \
@@ -63,7 +63,7 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} \
 
 
 %files -n python3-%{pypi_name}
-%license COPYING "GNU AFFERO GPL V3"
+%license COPYING
 %{python3_sitearch}/fitz/
 %{python3_sitearch}/PyMuPDF*
 
@@ -71,6 +71,9 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} \
 %doc demo docs_built/* README.md
 
 %changelog
+* Thu Mar 25 2021 Scott Talbert <swt@techie.net> - 1.18.10-1
+- Update to new upstream release 1.18.10 (#1933388)
+
 * Wed Feb 24 2021 Michael J Gruber <mjg@fedoraproject.org> - 1.18.8-2
 - rebuild for mupdf CVE-2021-3407
 
