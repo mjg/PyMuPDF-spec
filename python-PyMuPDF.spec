@@ -1,7 +1,7 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.18.11
+Version:        1.18.13
 Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
@@ -71,6 +71,9 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} \
 %doc demo docs_built/* README.md
 
 %changelog
+* Thu May 06 2021 Scott Talbert <swt@techie.net> - 1.18.13-1
+- Update to new upstream release 1.18.13 (#1957559)
+
 * Sat Apr 17 2021 Scott Talbert <swt@techie.net> - 1.18.11-1
 - Update to new upstream release 1.18.11 (#1948243)
 
