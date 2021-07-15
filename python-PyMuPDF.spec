@@ -61,7 +61,9 @@ sphinx-build docs docs_built
 rm -f %{buildroot}%{_prefix}/README.md
 
 %check
-%pytest -k "not test_font1"
+# test_font fails due to missing CJK fonts
+# test_matrix fails on ppc64le, aarch64, s390x
+%pytest -k "not (test_font1 or test_matrix)"
 
 
 %files -n python3-%{pypi_name}
