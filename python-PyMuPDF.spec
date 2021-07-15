@@ -1,15 +1,18 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.18.14
+Version:        1.18.15
 Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:        AGPLv3+
 URL:            https://github.com/pymupdf/PyMuPDF
 Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
+Patch0:         no-rinotype.patch
 
 BuildRequires:  python3-devel
+BuildRequires:  python3-pillow
+BuildRequires:  python3-pytest
 BuildRequires:  python3-sphinx
 BuildRequires:  python3-sphinx_rtd_theme
 BuildRequires:  gcc
@@ -47,7 +50,7 @@ BuildArch:      noarch
 python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 
 %prep
-%autosetup -n %{pypi_name}-%{version}
+%autosetup -n %{pypi_name}-%{version} -p 1
 
 %build
 %py3_build
@@ -58,8 +61,7 @@ sphinx-build docs docs_built
 rm -f %{buildroot}%{_prefix}/README.md
 
 %check
-PYTHONPATH=%{buildroot}%{python3_sitearch} \
-  %{__python3} -c 'import sys; sys.path.remove(""); import fitz'
+%pytest -k "not test_font1"
 
 
 %files -n python3-%{pypi_name}
@@ -71,6 +73,9 @@ PYTHONPATH=%{buildroot}%{python3_sitearch} \
 %doc demo docs_built/* README.md
 
 %changelog
+* Mon Jul 12 2021 Scott Talbert <swt@techie.net> - 1.18.15-1
+- Update to new upstream release 1.18.15 (#1981087)
+
 * Tue Jun 15 2021 Scott Talbert <swt@techie.net> - 1.18.14-1
 - Update to new upstream release 1.18.14 (#1967360)
 
