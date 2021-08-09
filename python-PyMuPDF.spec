@@ -1,16 +1,16 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.18.15
-Release:        2%{?dist}
+Version:        1.18.16
+Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:        AGPLv3+
 URL:            https://github.com/pymupdf/PyMuPDF
 Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
-Patch0:         no-rinotype.patch
 
 BuildRequires:  python3-devel
+BuildRequires:  python3-fonttools
 BuildRequires:  python3-pillow
 BuildRequires:  python3-pytest
 BuildRequires:  python3-sphinx
@@ -61,9 +61,7 @@ sphinx-build docs docs_built
 rm -f %{buildroot}%{_prefix}/README.md
 
 %check
-# test_font fails due to missing CJK fonts
-# test_matrix fails on ppc64le, aarch64, s390x
-%pytest -k "not (test_font1 or test_matrix)"
+%pytest
 
 
 %files -n python3-%{pypi_name}
@@ -75,6 +73,9 @@ rm -f %{buildroot}%{_prefix}/README.md
 %doc demo docs_built/* README.md
 
 %changelog
+* Mon Aug 09 2021 Scott Talbert <swt@techie.net> - 1.18.16-1
+- Update to new upstream release 1.18.16 (#1991265)
+
 * Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.18.15-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
