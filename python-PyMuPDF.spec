@@ -1,7 +1,7 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.18.19
+Version:        1.19.0
 Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
@@ -15,7 +15,7 @@ BuildRequires:  python3-pillow
 BuildRequires:  python3-pytest
 BuildRequires:  python3-sphinx
 BuildRequires:  python3-sphinx_rtd_theme
-BuildRequires:  gcc
+BuildRequires:  gcc gcc-c++
 BuildRequires:  swig
 BuildRequires:  zlib-devel
 BuildRequires:  mupdf-static
@@ -73,6 +73,9 @@ rm -f %{buildroot}%{_prefix}/README.md
 %doc demo docs_built/* README.md
 
 %changelog
+* Sun Oct 17 2021 Michael J Gruber <mjg@fedoraproject.org> - 1.19.0-1
+- Update to new upstream release 1.19.0 (#2014860)
+
 * Fri Sep 17 2021 Scott Talbert <swt@techie.net> - 1.18.19-1
 - Update to new upstream release 1.18.19 (#2005248)
 
