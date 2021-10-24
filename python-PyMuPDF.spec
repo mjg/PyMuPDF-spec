@@ -1,13 +1,14 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.19.0
+Version:        1.19.1
 Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:        AGPLv3+
 URL:            https://github.com/pymupdf/PyMuPDF
 Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
+Patch1:         0001-Build-with-tesseract-leptonica-on-Fedora.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-fonttools
@@ -26,6 +27,8 @@ BuildRequires:  jbig2dec-devel
 BuildRequires:  freetype-devel
 BuildRequires:  harfbuzz-devel
 BuildRequires:  gumbo-parser-devel
+BuildRequires:  leptonica-devel
+BuildRequires:  tesseract-devel
 
 %global _description %{expand:
 This is PyMuPDF, a Python binding for MuPDF - a lightweight PDF and XPS
@@ -73,6 +76,10 @@ rm -f %{buildroot}%{_prefix}/README.md
 %doc demo docs_built/* README.md
 
 %changelog
+* Sun Oct 24 2021 Michael J Gruber <mjg@fedoraproject.org> - 1.19.1-1
+- Update to new upstream release 1.19.1
+- Enable OCR with the leptonica/tesseract engine
+
 * Sun Oct 17 2021 Michael J Gruber <mjg@fedoraproject.org> - 1.19.0-1
 - Update to new upstream release 1.19.0 (#2014860)
 
