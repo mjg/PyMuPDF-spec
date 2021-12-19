@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.19.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:        AGPLv3+
@@ -75,6 +75,9 @@ rm -f %{buildroot}%{_prefix}/README.md
 %doc demo docs_built/* README.md
 
 %changelog
+* Sun Dec 19 2021 Sandro Mani <manisandro@gmail.com> - 1.19.3-3
+- Rebuild (tesseract)
+
 * Tue Dec 14 2021 Sandro Mani <manisandro@gmail.com> - 1.19.3-2
 - Rebuild (tesseract)
 
