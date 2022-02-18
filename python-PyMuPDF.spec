@@ -1,13 +1,14 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.19.4
-Release:        2%{?dist}
+Version:        1.19.5
+Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:        AGPLv3+
 URL:            https://github.com/pymupdf/PyMuPDF
 Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
+Patch0:         c5d7bad674d8728caed86387f76bef38a6c800c4.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-fonttools
@@ -75,6 +76,9 @@ rm -f %{buildroot}%{_prefix}/README.md
 %doc demo docs_built/* README.md
 
 %changelog
+* Fri Feb 18 2022 Scott Talbert <swt@techie.net> - 1.19.5-1
+- Update to new upstream release 1.19.5 (#2050691)
+
 * Fri Jan 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.19.4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 

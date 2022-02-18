@@ -1,0 +1,29 @@
+From c5d7bad674d8728caed86387f76bef38a6c800c4 Mon Sep 17 00:00:00 2001
+From: "Jorj X. McKie" <jorj.x.mckie@outlook.de>
+Date: Fri, 18 Feb 2022 12:15:09 -0400
+Subject: [PATCH] Update test data
+
+---
+ tests/resources/circular-toc.pdf | Bin 0 -> 1099 bytes
+ tests/resources/symbols.txt      |   5 +++--
+ tests/resources/type3font.pdf    | Bin 0 -> 6812 bytes
+ 3 files changed, 3 insertions(+), 2 deletions(-)
+ create mode 100644 tests/resources/circular-toc.pdf
+ create mode 100644 tests/resources/type3font.pdf
+
+diff --git a/tests/resources/symbols.txt b/tests/resources/symbols.txt
+index 11719ee1..0aeef39a 100644
+--- a/tests/resources/symbols.txt
++++ b/tests/resources/symbols.txt
+@@ -69,8 +69,9 @@
+   'even_odd': False,
+   'fill': (1.0, 0.0, 0.0),
+   'fill_opacity': 1.0,
+-  'items': [('qu',
+-             ((50.0, 255.0), (75.0, 280.0), (75.0, 230.0), (100.0, 255.0)))],
++  'items': [('l', (75.0, 230.0), (100.0, 255.0)),
++            ('l', (100.0, 255.0), (75.0, 280.0)),
++            ('l', (75.0, 280.0), (50.0, 255.0))],
+   'lineCap': (0, 0, 0),
+   'lineJoin': 0.0,
+   'rect': (50.0, 230.0, 100.0, 280.0),
