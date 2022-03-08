@@ -1,14 +1,13 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.19.5
-Release:        2%{?dist}
+Version:        1.19.6
+Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:        AGPLv3+
 URL:            https://github.com/pymupdf/PyMuPDF
 Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
-Patch0:         c5d7bad674d8728caed86387f76bef38a6c800c4.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-fonttools
@@ -76,6 +75,9 @@ rm -f %{buildroot}%{_prefix}/README.md
 %doc demo docs_built/* README.md
 
 %changelog
+* Tue Mar 08 2022 Scott Talbert <swt@techie.net> - 1.19.6-1
+- Update to new upstream release 1.19.6 (#2061128)
+
 * Fri Feb 25 2022 Sandro Mani <manisandro@gmail.com> - 1.19.5-2
 - Rebuild (leptonica)
 
