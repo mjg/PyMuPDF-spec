@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.19.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:        AGPLv3+
@@ -75,6 +75,9 @@ rm -f %{buildroot}%{_prefix}/README.md
 %doc demo docs_built/* README.md
 
 %changelog
+* Fri May 20 2022 Sandro Mani <manisandro@gmail.com> - 1.19.6-3
+- Rebuild for gdal-3.5.0 and/or openjpeg-2.5.0
+
 * Thu Mar 10 2022 Sandro Mani <manisandro@gmail.com> - 1.19.6-2
 - Rebuild for tesseract 5.1.0
 
