@@ -1,7 +1,7 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.20.1
+Version:        1.20.2
 Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
@@ -54,6 +54,8 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 
 %prep
 %autosetup -n %{pypi_name}-%{version} -p 1
+# Do not build again in install step
+sed -ie "/or 'install' in sys.argv/d" setup.py
 
 %build
 export PYMUPDF_SETUP_MUPDF_BUILD=''
@@ -78,6 +80,9 @@ rm -f %{buildroot}%{_prefix}/README.md
 %doc docs_built/* README.md
 
 %changelog
+* Fri Aug 12 2022 Michael J Gruber <mjg@fedoraproject.org> - 1.20.2-1
+- Update to new upstream release 1.20.2 (#2118056)
+
 * Thu Jul 28 2022 Scott Talbert <swt@techie.net> - 1.20.1-1
 - Update to new upstream release 1.20.1 (#2101869)
 
