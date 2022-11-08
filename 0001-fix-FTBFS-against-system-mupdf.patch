@@ -1,0 +1,26 @@
+From 99762987327a1de774b2180490c3f45db648883e Mon Sep 17 00:00:00 2001
+Message-Id: <99762987327a1de774b2180490c3f45db648883e.1667948785.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Wed, 9 Nov 2022 00:06:21 +0100
+Subject: [PATCH] fix FTBFS against system mupdf
+
+Signed-off-by: Michael J Gruber <mjg@fedoraproject.org>
+---
+ setup.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/setup.py b/setup.py
+index d687d39..55be4fc 100644
+--- a/setup.py
++++ b/setup.py
+@@ -534,6 +534,7 @@ if ('-h' not in sys.argv and '--help' not in sys.argv
+             mupdf_local += '/'
+     log( f'mupdf_local={mupdf_local!r}')
+     unix_build_dir = None
++    unix_build_type = None
+     
+     # Force clean build of MuPDF.
+     #
+-- 
+2.38.1.500.g6f45862117
+
