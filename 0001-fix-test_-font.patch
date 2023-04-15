@@ -1,0 +1,43 @@
+From 35b5f8489385ea84a5dc0300cd216feee9772415 Mon Sep 17 00:00:00 2001
+Message-ID: <35b5f8489385ea84a5dc0300cd216feee9772415.1681574102.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Sat, 15 Apr 2023 17:53:27 +0200
+Subject: [PATCH] fix test_*font
+
+Depending on build options and system, noto fonts may or may not be
+present. Thus font tests expecting them may fail for the wrong reason.
+
+Adjust the tests to use the fallback font instead.
+---
+ tests/test_general.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/tests/test_general.py b/tests/test_general.py
+index 68da7fd..c5d45d3 100644
+--- a/tests/test_general.py
++++ b/tests/test_general.py
+@@ -121,9 +121,9 @@ def test_bug1971():
+         doc.close()
+ 
+ def test_default_font():
+-    f = fitz.Font()
+-    assert str(f) == "Font('Noto Serif Regular')"
+-    assert repr(f) == "Font('Noto Serif Regular')"
++    f = fitz.Font(ordering=0)
++    assert str(f) == "Font('Droid Sans Fallback Regular')"
++    assert repr(f) == "Font('Droid Sans Fallback Regular')"
+ 
+ def test_add_ink_annot():
+     import math
+@@ -186,7 +186,7 @@ def test_get_text_dict():
+     json.dumps( blocks, indent=4)
+ 
+ def test_font():
+-    font = fitz.Font()
++    font = fitz.Font(ordering=0)
+     print(repr(font))
+     bbox = font.glyph_bbox( 65)
+     print( f'bbox={bbox!r}')
+-- 
+2.40.0.414.g17ff5447bb
+

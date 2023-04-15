@@ -1,14 +1,14 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.21.1
-Release:        6%{?dist}
+Version:        1.22.0
+Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:        AGPL-3.0-or-later
 URL:            https://github.com/pymupdf/PyMuPDF
 Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
-Patch0:         0001-fix-FTBFS-against-system-mupdf.patch
+Patch0:         0001-fix-test_-font.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-fonttools
@@ -81,6 +81,11 @@ rm -f %{buildroot}%{_prefix}/README.md
 %doc docs_built/* README.md
 
 %changelog
+* Sat Apr 15 2023 Michael J Gruber <mjg@fedoraproject.org> - 1.22.0-1
+- Update to new upstream release 1.22.0 (rhbz#2186919)
+- Text extraction now includes glyphs that overlap with clip rect, not just those contained entirely.
+- Compatibility with mupdf 1.22.0, various bug fixes.
+
 * Thu Apr 06 2023 Sandro Mani <manisandro@gmail.com> - 1.21.1-6
 - Rebuild (tesseract)
 
