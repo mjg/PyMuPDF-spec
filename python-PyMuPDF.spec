@@ -1,7 +1,7 @@
 %global pypi_name PyMuPDF
 
 Name:           python-%{pypi_name}
-Version:        1.22.0
+Version:        1.22.1
 Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
@@ -81,6 +81,10 @@ rm -f %{buildroot}%{_prefix}/README.md
 %doc docs_built/* README.md
 
 %changelog
+* Mon Apr 24 2023 Michael J Gruber <mjg@fedoraproject.org> - 1.22.1-1
+- Update to new upstream release 1.22.1 (rhbz#2186919)
+- Minor bug fixes
+
 * Sat Apr 15 2023 Michael J Gruber <mjg@fedoraproject.org> - 1.22.0-1
 - Update to new upstream release 1.22.0 (rhbz#2186919)
 - Text extraction now includes glyphs that overlap with clip rect, not just those contained entirely.
