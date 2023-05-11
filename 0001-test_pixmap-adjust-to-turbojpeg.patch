@@ -1,0 +1,29 @@
+From 735ce0fb7bf1938ead530b7138499464c6127f96 Mon Sep 17 00:00:00 2001
+Message-ID: <735ce0fb7bf1938ead530b7138499464c6127f96.1683816092.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Thu, 11 May 2023 16:40:03 +0200
+Subject: [PATCH] test_pixmap: adjust to turbojpeg
+
+Apparantly, different jpeg libraries decode the test jpg differently.
+Adjust to turbojpeg's color count until upstream uses an invariant
+format.
+---
+ tests/test_pixmap.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/test_pixmap.py b/tests/test_pixmap.py
+index 889858b..420245e 100644
+--- a/tests/test_pixmap.py
++++ b/tests/test_pixmap.py
+@@ -91,7 +91,7 @@ def test_setalpha():
+ 
+ def test_color_count():
+     pm = fitz.Pixmap(imgfile)
+-    assert pm.color_count() == 40624
++    assert pm.color_count() == 39912
+ 
+ def test_memoryview():
+     pm = fitz.Pixmap(imgfile)
+-- 
+2.40.1.683.g916cfae490
+

@@ -2,13 +2,14 @@
 
 Name:           python-%{pypi_name}
 Version:        1.22.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:        AGPL-3.0-or-later
 URL:            https://github.com/pymupdf/PyMuPDF
 Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
 Patch0:         0001-fix-test_-font.patch
+Patch1:         0001-test_pixmap-adjust-to-turbojpeg.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-fonttools
@@ -69,8 +70,11 @@ rm -f %{buildroot}%{_prefix}/README.md
 
 %check
 # FIXME: Crashes with Aborted, corrupted double-linked list
+%ifarch s390 s390x
 %pytest || :
-
+%else
+%pytest
+%endif
 
 %files -n python3-%{pypi_name}
 %license COPYING
@@ -81,6 +85,9 @@ rm -f %{buildroot}%{_prefix}/README.md
 %doc docs_built/* README.md
 
 %changelog
+* Thu May 11 2023 Michael J Gruber <mjg@fedoraproject.org> - 1.22.3-2
+- Reenable test suite where possible
+
 * Thu May 11 2023 Michael J Gruber <mjg@fedoraproject.org> - 1.22.3-1
 - Update to new upstream release 1.22.3 (rhbz#2186919)
 
