@@ -1,0 +1,51 @@
+From 7955c49d6bf34a96cab8c79092c85fb3fae759e5 Mon Sep 17 00:00:00 2001
+Message-ID: <7955c49d6bf34a96cab8c79092c85fb3fae759e5.1693919816.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Mon, 4 Sep 2023 21:56:27 +0200
+Subject: [PATCH] unbreak build against system libraries
+
+---
+ setup.py | 20 ++++++++++++++++++--
+ 1 file changed, 18 insertions(+), 2 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index c65df8d..ddf1fdd 100755
+--- a/setup.py
++++ b/setup.py
+@@ -956,7 +956,7 @@ def _build_extensions( mupdf_local, mupdf_build_dir, build_type):
+     if mupdf_build_dir:
+         mupdf_build_dir_flags = os.path.basename( mupdf_build_dir).split( '-')
+     else:
+-        mupdf_build_dir_flags = ''
++        mupdf_build_dir_flags = build_type
+     optimise = 'release' in mupdf_build_dir_flags
+     debug = 'debug' in mupdf_build_dir_flags
+     if windows:
+@@ -1003,7 +1003,23 @@ def _build_extensions( mupdf_local, mupdf_build_dir, build_type):
+                     f'{mupdf_local}/thirdparty/freetype/include',
+                     )
+         else:
+-            includes = None
++            includes = (
++                    '/usr/include',
++                    '/usr/include/freetype2',
++                    '/usr/include/mupdf'
++                    )
++            libs = (
++                    'freetype',
++                    'gumbo',
++                    'harfbuzz',
++                    'jbig2dec',
++                    'jpeg',
++                    'leptonica',
++                    'mupdf',
++                    'mupdf-third',
++                    'openjp2',
++                    'tesseract'
++                    )
+         
+         # Update helper-git-versions.i.
+         f = io.StringIO()
+-- 
+2.42.0.383.g29d2502768
+
