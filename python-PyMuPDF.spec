@@ -2,7 +2,7 @@
 %global module_name fitz
 
 Name:           python-%{pypi_name}
-Version:        1.23.5
+Version:        1.23.6
 Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
@@ -93,6 +93,9 @@ sphinx-build docs docs_built
 %doc docs_built/* README.md
 
 %changelog
+* Mon Nov 06 2023 Michael J Gruber <mjg@fedoraproject.org> - 1.23.6-1
+- Update to new upstream release 1.23.6 (rhbz#2244148)
+
 * Mon Nov 06 2023 Michael J Gruber <mjg@fedoraproject.org> - 1.23.5-1
 - Update to new upstream release 1.23.5 (rhbz#2244148)
 
