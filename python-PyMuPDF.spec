@@ -2,8 +2,8 @@
 %global module_name fitz
 
 Name:           python-%{pypi_name}
-Version:        1.23.4
-Release:        2%{?dist}
+Version:        1.23.5
+Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:        AGPL-3.0-or-later
@@ -12,7 +12,6 @@ Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
 Patch0:         0001-fix-test_-font.patch
 Patch1:         0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch2:         0001-adjust-tesseract-tessdata-path-to-Fedora-default.patch
-Patch3:         0001-setup.py-fixed-debug-optimisation-flags-of-PyMuPDF-e.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-fonttools
@@ -94,6 +93,9 @@ sphinx-build docs docs_built
 %doc docs_built/* README.md
 
 %changelog
+* Mon Nov 06 2023 Michael J Gruber <mjg@fedoraproject.org> - 1.23.5-1
+- Update to new upstream release 1.23.5 (rhbz#2244148)
+
 * Wed Oct 11 2023 Michael J Gruber <mjg@fedoraproject.org> - 1.23.4-2
 - Rebuild for mupdf 1.23.4
 
