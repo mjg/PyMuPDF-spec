@@ -1,0 +1,26 @@
+From a24172d8aea49b4d63f134ba2857e45bb353f2b7 Mon Sep 17 00:00:00 2001
+Message-ID: <a24172d8aea49b4d63f134ba2857e45bb353f2b7.1706908861.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Fri, 2 Feb 2024 22:20:42 +0100
+Subject: [PATCH] fix type error with GCC 14
+
+---
+ fitz/fitz.i | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fitz/fitz.i b/fitz/fitz.i
+index 15104bab..21c824bc 100644
+--- a/fitz/fitz.i
++++ b/fitz/fitz.i
+@@ -155,7 +155,7 @@ static void show(const char* prefix, PyObject* obj);
+ // additional headers ----------------------------------------------
+ pdf_obj *pdf_lookup_page_loc(fz_context *ctx, pdf_document *doc, int needle, pdf_obj **parentp, int *indexp);
+ fz_pixmap *fz_scale_pixmap(fz_context *ctx, fz_pixmap *src, float x, float y, float w, float h, const fz_irect *clip);
+-int fz_pixmap_size(fz_context *ctx, fz_pixmap *src);
++size_t fz_pixmap_size(fz_context *ctx, fz_pixmap *src);
+ void fz_subsample_pixmap(fz_context *ctx, fz_pixmap *tile, int factor);
+ void fz_copy_pixmap_rect(fz_context *ctx, fz_pixmap *dest, fz_pixmap *src, fz_irect b, const fz_default_colorspaces *default_cs);
+ static const float JM_font_ascender(fz_context *ctx, fz_font *font);
+-- 
+2.43.0.692.g719022bfa2
+
