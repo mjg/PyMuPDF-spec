@@ -1,0 +1,35 @@
+From c07c8683d18c52ecd80dc6d85d9b90f28453f1d6 Mon Sep 17 00:00:00 2001
+Message-ID: <c07c8683d18c52ecd80dc6d85d9b90f28453f1d6.1707474989.git.mjg@fedoraproject.org>
+From: Julian Smith <julian.smith@artifex.com>
+Date: Thu, 1 Feb 2024 15:30:57 +0000
+Subject: [PATCH] src/__init__.py: JM_image_reporter(): work with change to
+ mupdf master.
+
+New mupdf has extra `fz_rect scissor` arg in
+pdf_sanitize_filter_options::image_filter().
+---
+ src/__init__.py | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/src/__init__.py b/src/__init__.py
+index ef6b1d9c..321b2059 100644
+--- a/src/__init__.py
++++ b/src/__init__.py
+@@ -16042,8 +16042,12 @@ def JM_image_reporter(page):
+         def __init__(self):
+             super().__init__()
+             self.use_virtual_image_filter()
+-        def image_filter(self, ctx, ctm, name, image):
+-            JM_image_filter(None, mupdf.FzMatrix(ctm), name, image)
++        if mupdf_version_tuple >= (1, 24):
++            def image_filter(self, ctx, ctm, name, image, scissor):
++                JM_image_filter(None, mupdf.FzMatrix(ctm), name, image)
++        else:
++            def image_filter(self, ctx, ctm, name, image):
++                JM_image_filter(None, mupdf.FzMatrix(ctm), name, image)
+ 
+     sanitize_filter_options = SanitizeFilterOptions()
+ 
+-- 
+2.43.0.710.g31023adb55
+
