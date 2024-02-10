@@ -1,19 +1,26 @@
+## Pull in upstream source:
+# {{{ git submodule update --init --recursive 1>&2; git submodule }}}
+%global gitversion      {{{ git -C source rev-parse HEAD }}}
+%global gitshortversion {{{ git -C source rev-parse --short HEAD }}}
+%global gitdescribefedversion  {{{ git -C source describe --tags | sed -e 's/^\(.*\)-\([0-9]*\)-g\(.*\)$/\1^\2.g\3/' }}}
+
 %global pypi_name PyMuPDF
 %global module_name fitz
 
 Name:           python-%{pypi_name}
-Version:        1.23.21
-Release:        %autorelease
+Version:        %{gitdescribefedversion}
+Release:        1%{?dist}
 Summary:        Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:        AGPL-3.0-or-later
 URL:            https://github.com/pymupdf/PyMuPDF
-Source0:        %{url}/archive/%{version}/%{pypi_name}-%{version}.tar.gz
+# rpkg's git_pack does not cope well with submodules, so we force it to assume a dirty tree.
+# The tree is unmodified (before possibly applying patches).
+Source0:        {{{ GIT_DIRTY=1 git_pack path=source dir_name=PyMuPDF }}}
 Patch0:         0001-fix-test_-font.patch
 Patch1:         0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch2:         0001-adjust-tesseract-tessdata-path-to-Fedora-default.patch
 Patch3:         0001-fix-type-error-with-GCC-14.patch
-Patch4:         0001-src-__init__.py-JM_image_reporter-work-with-change-t.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-fonttools
@@ -57,7 +64,7 @@ BuildArch:      noarch
 python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 
 %prep
-%autosetup -n %{pypi_name}-%{version} -p 1
+%autosetup -n PyMuPDF -p 1
 
 %build
 # generate debug symbols
@@ -104,4 +111,5 @@ SKIP="$SKIP and not test_insert and not test_3087"
 %doc docs_built/* README.md
 
 %changelog
-%autochangelog
+* Sat Feb 10 2024 Michael J Gruber <mjg@fedoraproject.org> - 1.23.21^13.gc76d471
+- build from git/copr
