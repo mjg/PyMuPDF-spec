@@ -7,6 +7,8 @@
 %global pypi_name PyMuPDF
 %global module_name fitz
 
+%bcond docs %{defined fedora}
+
 Name:           python-%{pypi_name}
 Version:        %{gitdescribefedversion}
 Release:        1%{?dist}
@@ -28,11 +30,13 @@ BuildRequires:  python3-pillow
 BuildRequires:  python3-pip
 BuildRequires:  python3-psutil
 BuildRequires:  python3-pytest
+%if %{with docs}
 BuildRequires:  python3-sphinx
 BuildRequires:  python3-sphinx-copybutton
 BuildRequires:  python3-sphinx-notfound-page
 BuildRequires:  python3-furo
 BuildRequires:  rst2pdf
+%endif
 BuildRequires:  gcc gcc-c++
 BuildRequires:  swig
 BuildRequires:  zlib-devel
@@ -56,12 +60,14 @@ Summary:        %{summary}
 
 %description -n python3-%{pypi_name} %_description
 
+%if %{with docs}
 %package        doc
 Summary:        Documentation for python-%{pypi_name}
 BuildArch:      noarch
 
 %description    doc
 python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
+%endif
 
 %prep
 %autosetup -n PyMuPDF -p 1
@@ -76,7 +82,9 @@ export PYMUPDF_SETUP_IMPLEMENTATIONS='b'
 CFLAGS="$CFLAGS -I/usr/include -I/usr/include/freetype2 -I/usr/include/mupdf"
 LDFLAGS="$LDFLAGS -lfreetype -lmupdf"
 %pyproject_wheel
+%if %{with docs}
 sphinx-build docs docs_built
+%endif
 
 %install
 %pyproject_install
@@ -107,8 +115,10 @@ SKIP="$SKIP and not test_insert and not test_3087"
 %{python3_sitearch}/%{module_name}/
 %{python3_sitearch}/PyMuPDF*
 
+%if %{with docs}
 %files doc
 %doc docs_built/* README.md
+%endif
 
 %changelog
 * Sat Feb 10 2024 Michael J Gruber <mjg@fedoraproject.org> - 1.23.21^13.gc76d471
