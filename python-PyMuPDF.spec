@@ -56,6 +56,8 @@ quality.  With PyMuPDF you therefore can also access files with extensions
 Summary:        %{summary}
 # provide the importable module:
 %py_provides python3-%{module_name}
+# upstream pyproject.toml is borked so add manually:
+Requires:       python3-mupdf
 
 %description -n python3-%{pypi_name} %_description
 
