@@ -113,6 +113,7 @@ SKIP="$SKIP and not test_insert and not test_3087"
 
 %files -n python3-%{pypi_name}
 %license COPYING
+%{_bindir}/pymupdf
 %{python3_sitearch}/%{module_name}/
 %{python3_sitearch}/PyMuPDF*
 
