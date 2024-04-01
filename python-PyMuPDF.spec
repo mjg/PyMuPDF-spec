@@ -91,8 +91,10 @@ sphinx-build docs docs_built
 %pyproject_install
 
 %check
+# linters have no place in distro build tests
+SKIP="not test_pylint"
 # test_fontarchives tries to download special module via pip
-SKIP="not test_fontarchive"
+SKIP="$SKIP and not test_fontarchive"
 # flake8 has no place in downstream packaging
 SKIP="$SKIP and not test_flake8"
 # test_3050 is known to fail for distribution builds
