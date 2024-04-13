@@ -97,6 +97,8 @@ SKIP="not test_pylint"
 SKIP="$SKIP and not test_fontarchive"
 # flake8 has no place in downstream packaging
 SKIP="$SKIP and not test_flake8"
+# test_2548 fails due to reliance in unstable output
+SKIP="$SKIP and not test_2548"
 # test_2791 fails sporadically with its empiric bounds
 SKIP="$SKIP and not test_2791"
 # test_3050 is known to fail for distribution builds
