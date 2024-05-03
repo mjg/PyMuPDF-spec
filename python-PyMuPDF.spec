@@ -6,6 +6,7 @@
 
 %global pypi_name PyMuPDF
 %global module_name fitz
+%global module_name_compat pymupdf
 
 %bcond docs %{defined fedora}
 
@@ -120,6 +121,7 @@ SKIP="$SKIP and not test_insert and not test_3087"
 %{_bindir}/pymupdf
 %{python3_sitearch}/%{module_name}/
 %{python3_sitearch}/PyMuPDF*
+%pycached %{python3_sitearch}/%{module_name_compat}.py
 
 %if %{with docs}
 %files doc
