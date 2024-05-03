@@ -1,5 +1,5 @@
-From 17289c8e8a8e41edd2111c462b0f51ec0ac0ef24 Mon Sep 17 00:00:00 2001
-Message-ID: <17289c8e8a8e41edd2111c462b0f51ec0ac0ef24.1707427913.git.mjg@fedoraproject.org>
+From 34f259627a1ba6c354b7108cc36b3aa8e3ee3581 Mon Sep 17 00:00:00 2001
+Message-ID: <34f259627a1ba6c354b7108cc36b3aa8e3ee3581.1714747659.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Sat, 15 Apr 2023 17:53:27 +0200
 Subject: [PATCH] fix test_*font
@@ -13,31 +13,31 @@ Adjust the tests to use the fallback font instead.
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/tests/test_general.py b/tests/test_general.py
-index 44c4cbcd..2d66ccc8 100644
+index 9b4b7aca..829ec0cf 100644
 --- a/tests/test_general.py
 +++ b/tests/test_general.py
-@@ -156,9 +156,9 @@ def test_bug1971():
+@@ -162,9 +162,9 @@ def test_bug1971():
          assert doc.is_closed
  
  def test_default_font():
--    f = fitz.Font()
+-    f = pymupdf.Font()
 -    assert str(f) == "Font('Noto Serif Regular')"
 -    assert repr(f) == "Font('Noto Serif Regular')"
-+    f = fitz.Font(ordering=0)
++    f = pymupdf.Font(ordering=0)
 +    assert str(f) == "Font('Droid Sans Fallback Regular')"
 +    assert repr(f) == "Font('Droid Sans Fallback Regular')"
  
  def test_add_ink_annot():
      import math
-@@ -221,7 +221,7 @@ def test_get_text_dict():
+@@ -227,7 +227,7 @@ def test_get_text_dict():
      json.dumps( blocks, indent=4)
  
  def test_font():
--    font = fitz.Font()
-+    font = fitz.Font(ordering=0)
+-    font = pymupdf.Font()
++    font = pymupdf.Font(ordering=0)
      print(repr(font))
      bbox = font.glyph_bbox( 65)
      print( f'bbox={bbox!r}')
 -- 
-2.43.0.710.g31023adb55
+2.45.0.126.g110af8c3bd
 

@@ -1,5 +1,5 @@
-From d755e35a74fe6a32bd8cca465f2b05184d39207a Mon Sep 17 00:00:00 2001
-Message-ID: <d755e35a74fe6a32bd8cca465f2b05184d39207a.1707427333.git.mjg@fedoraproject.org>
+From 13594d8a26b80e7c2135e10bb90b370662c6914d Mon Sep 17 00:00:00 2001
+Message-ID: <13594d8a26b80e7c2135e10bb90b370662c6914d.1714747656.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Thu, 11 May 2023 16:40:03 +0200
 Subject: [PATCH] test_pixmap: adjust to turbojpeg
@@ -12,18 +12,18 @@ format.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tests/test_pixmap.py b/tests/test_pixmap.py
-index 3c4a1be5..49a897e3 100644
+index 4ee10505..e7e3dc89 100644
 --- a/tests/test_pixmap.py
 +++ b/tests/test_pixmap.py
 @@ -99,7 +99,7 @@ def test_color_count():
      e.g. in Linux system installs.
      '''
-     pm = fitz.Pixmap(imgfile)
+     pm = pymupdf.Pixmap(imgfile)
 -    assert pm.color_count() == 40624
 +    assert pm.color_count() == 39912
  
  def test_memoryview():
-     pm = fitz.Pixmap(imgfile)
+     pm = pymupdf.Pixmap(imgfile)
 -- 
-2.43.0.710.g31023adb55
+2.45.0.126.g110af8c3bd
 

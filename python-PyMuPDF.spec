@@ -5,8 +5,8 @@
 %global gitdescribefedversion	{{{ git -C source describe --tags | sed -e 's/^\(.*\)-\([0-9]*\)-g\(.*\)$/\1^\2.g\3/' }}}
 
 %global pypi_name PyMuPDF
-%global module_name fitz
-%global module_name_compat pymupdf
+%global module_name pymupdf
+%global module_name_compat fitz
 
 %bcond docs %{defined fedora}
 
