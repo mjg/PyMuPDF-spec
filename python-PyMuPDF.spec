@@ -122,7 +122,7 @@ SKIP="$SKIP and not test_insert and not test_3087"
 %{_bindir}/pymupdf
 %{python3_sitearch}/%{module_name}/
 %{python3_sitearch}/PyMuPDF*
-%pycached %{python3_sitearch}/%{module_name_compat}.py
+%{python3_sitearch}/%{module_name_compat}/
 
 %if %{with docs}
 %files doc
