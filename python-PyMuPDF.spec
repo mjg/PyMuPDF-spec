@@ -23,6 +23,7 @@ Source0:	{{{ GIT_DIRTY=1 git_pack path=source dir_name=PyMuPDF }}}
 Patch0:		0001-fix-test_-font.patch
 Patch1:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch2:		0001-adjust-tesseract-tessdata-path-to-Fedora-default.patch
+Patch3:		0001-docs-Some-corrections-and-minor-updates.patch
 
 BuildRequires:	python3-devel
 BuildRequires:	python3-fonttools
