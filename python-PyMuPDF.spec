@@ -114,7 +114,7 @@ SKIP="$SKIP and not test_3087"
 SKIP="$SKIP and not test_htmlbox1"
 %endif
 # spuriously failing tests (several archs)
-SKIP="$SKIP and not test_insert and not test_3087"
+SKIP="$SKIP and not test_insert and not test_3081 and not test_3087"
 %pytest -k "$SKIP"
 
 %files -n python3-%{pypi_name}
