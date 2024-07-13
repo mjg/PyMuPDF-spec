@@ -94,7 +94,7 @@ sphinx-build docs docs_built
 
 %check
 # linters have no place in distro build tests
-SKIP="not test_pylint"
+SKIP="not test_codespell and not test_pylint"
 # test_fontarchives tries to download special module via pip
 SKIP="$SKIP and not test_fontarchive"
 # flake8 has no place in downstream packaging
