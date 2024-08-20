@@ -1,0 +1,62 @@
+From 56391e5bd4605549abe5a9366e2a23e26fd55899 Mon Sep 17 00:00:00 2001
+Message-ID: <56391e5bd4605549abe5a9366e2a23e26fd55899.1724182862.git.mjg@fedoraproject.org>
+In-Reply-To: <ea2c10396ce47ce8811713a60bd41b0ee3f0751d.1724182862.git.mjg@fedoraproject.org>
+References: <ea2c10396ce47ce8811713a60bd41b0ee3f0751d.1724182862.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Mon, 25 Sep 2023 20:36:37 +0200
+Subject: [PATCH 2/2] adjust tesseract tessdata path to Fedora default
+
+In fact, we determine the path from `tesseract --list-langs` which gives
+exactly what `tesseract` sees. (We also change the debian-specific
+command name `tesseract-ocr` back to upstream's `tesseract` and lose the
+dependency on `whereis`.)
+---
+ src/__init__.py             | 15 ++++-----------
+ src_classic/helper-python.i |  2 +-
+ 2 files changed, 5 insertions(+), 12 deletions(-)
+
+diff --git a/src/__init__.py b/src/__init__.py
+index 21190b93..82414d5f 100644
+--- a/src/__init__.py
++++ b/src/__init__.py
+@@ -18077,20 +18077,13 @@ def get_tessdata():
+             return False
+ 
+     # Unix-like systems:
+-    cp = subprocess.run("whereis tesseract-ocr", shell=1, capture_output=1, check=0, text=True)
+-    response = cp.stdout.strip().split()
+-    if cp.returncode or len(response) != 2:  # if not 2 tokens: no tesseract-ocr
++    cp = subprocess.run("tesseract --list-langs", shell=1, capture_output=1, check=0, text=True)
++    response = cp.stdout.strip().split('"')
++    if cp.returncode or len(response) != 3:  # if not 3 tokens: no tesseract-ocr
+         message("tesseract-ocr is not installed")
+         return False
+ 
+-    # search tessdata in folder structure
+-    dirname = response[1]  # contains tesseract-ocr installation folder
+-    tessdatas = glob.glob(f"{dirname}/*/tessdata")
+-    tessdatas.sort()
+-    if len(tessdatas) == 0:
+-        message("unexpected: tesseract-ocr has no 'tessdata' folder")
+-        return False
+-    return tessdatas[-1]
++    return response[1]
+ 
+ 
+ def css_for_pymupdf_font(
+diff --git a/src_classic/helper-python.i b/src_classic/helper-python.i
+index 6ca431e1..01663cf7 100644
+--- a/src_classic/helper-python.i
++++ b/src_classic/helper-python.i
+@@ -2098,7 +2098,7 @@ def get_tessdata() -> str:
+     if sys.platform == "win32":
+         tessdata = "C:\\Program Files\\Tesseract-OCR\\tessdata"
+     else:
+-        tessdata = "/usr/share/tesseract-ocr/4.00/tessdata"
++        tessdata = "/usr/share/tesseract/tessdata"
+ 
+     if os.path.exists(tessdata):
+         return tessdata
+-- 
+2.46.0.444.g7c79821ace
+
