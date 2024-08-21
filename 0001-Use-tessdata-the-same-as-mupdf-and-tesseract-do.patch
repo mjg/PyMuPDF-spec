@@ -1,0 +1,195 @@
+From bb7df31251059c84dc746cccfb7067b6eab40382 Mon Sep 17 00:00:00 2001
+Message-ID: <bb7df31251059c84dc746cccfb7067b6eab40382.1724271509.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Wed, 21 Aug 2024 15:24:13 +0200
+Subject: [PATCH] Use tessdata the same as mupdf and tesseract do
+
+(lib)tesseract uses the data search path as passed in (if passed in),
+or from `TESSDATA_PREFIX` (if in the environemnt), or the compile time
+default. Mupdf uses the library in the same way.
+
+Make PyMuPDF do the same rather than trying to guess the path.
+Consequently, we change the test to expect either success or the
+specific type of failure which we get without proper data in the search
+path.
+---
+ src/__init__.py         | 61 ++---------------------------------------
+ src/utils.py            |  3 --
+ tests/test_tesseract.py | 34 +++++++++--------------
+ 3 files changed, 16 insertions(+), 82 deletions(-)
+
+diff --git a/src/__init__.py b/src/__init__.py
+index 21190b93..0204ac0a 100644
+--- a/src/__init__.py
++++ b/src/__init__.py
+@@ -266,7 +266,6 @@ OptStr = typing.Optional[str]
+ Page = 'Page_forward_decl'
+ Point = 'Point_forward_decl'
+ 
+-TESSDATA_PREFIX = os.environ.get("TESSDATA_PREFIX")
+ matrix_like = 'matrix_like'
+ point_like = 'point_like'
+ quad_like = 'quad_like'
+@@ -10108,8 +10107,6 @@ class Pixmap:
+         '''
+         Save pixmap as an OCR-ed PDF page.
+         '''
+-        if not TESSDATA_PREFIX and not tessdata:
+-            raise RuntimeError('No OCR support: TESSDATA_PREFIX not set')
+         opts = mupdf.FzPdfocrOptions()
+         opts.compress = compress
+         if language:
+@@ -10132,14 +10129,13 @@ class Pixmap:
+             language: (str) language(s) occurring on page, default "eng" (English),
+                     multiples like "eng+ger" for English and German.
+             tessdata: (str) folder name of Tesseract's language support. Must be
+-                    given if environment variable TESSDATA_PREFIX is not set.
++                    given if environment variable TESSDATA_PREFIX is not set
++                    and tesseract's default needs to be overridden.
+         Notes:
+             On failure, make sure Tesseract is installed and you have set the
+             environment variable "TESSDATA_PREFIX" to the folder containing your
+-            Tesseract's language support data.
++            Tesseract's language support data if tesseract does not find it.
+         """
+-        if not TESSDATA_PREFIX and not tessdata:
+-            raise RuntimeError('No OCR support: TESSDATA_PREFIX not set')
+         from io import BytesIO
+         bio = BytesIO()
+         self.pdfocr_save(bio, compress=compress, language=language, tessdata=tessdata)
+@@ -18042,57 +18038,6 @@ def get_pdf_str(s: str) -> str:
+     return "(" + r + ")"
+ 
+ 
+-def get_tessdata():
+-    """Detect Tesseract-OCR and return its language support folder.
+-
+-    This function can be used to enable OCR via Tesseract even if the
+-    environment variable TESSDATA_PREFIX has not been set.
+-    If the value of TESSDATA_PREFIX is None, the function tries to locate
+-    Tesseract-OCR and fills the required variable.
+-
+-    Returns:
+-        Folder name of tessdata if Tesseract-OCR is available, otherwise False.
+-    """
+-    TESSDATA_PREFIX = os.getenv("TESSDATA_PREFIX")
+-    if TESSDATA_PREFIX:  # use environment variable if set
+-        return TESSDATA_PREFIX
+-
+-    """
+-    Try to locate the tesseract-ocr installation.
+-    """
+-    import subprocess
+-    # Windows systems:
+-    if sys.platform == "win32":
+-        cp = subprocess.run("where tesseract", shell=1, capture_output=1, check=0, text=True)
+-        response = cp.stdout.strip()
+-        if cp.returncode or not response:
+-            message("Tesseract-OCR is not installed")
+-            return False
+-        dirname = os.path.dirname(response)  # path of tesseract.exe
+-        tessdata = os.path.join(dirname, "tessdata")  # language support
+-        if os.path.exists(tessdata):  # all ok?
+-            return tessdata
+-        else:  # should not happen!
+-            message("unexpected: Tesseract-OCR has no 'tessdata' folder")
+-            return False
+-
+-    # Unix-like systems:
+-    cp = subprocess.run("whereis tesseract-ocr", shell=1, capture_output=1, check=0, text=True)
+-    response = cp.stdout.strip().split()
+-    if cp.returncode or len(response) != 2:  # if not 2 tokens: no tesseract-ocr
+-        message("tesseract-ocr is not installed")
+-        return False
+-
+-    # search tessdata in folder structure
+-    dirname = response[1]  # contains tesseract-ocr installation folder
+-    tessdatas = glob.glob(f"{dirname}/*/tessdata")
+-    tessdatas.sort()
+-    if len(tessdatas) == 0:
+-        message("unexpected: tesseract-ocr has no 'tessdata' folder")
+-        return False
+-    return tessdatas[-1]
+-
+-
+ def css_for_pymupdf_font(
+     fontcode: str, *, CSS: OptStr = None, archive: AnyType = None, name: OptStr = None
+ ) -> str:
+diff --git a/src/utils.py b/src/utils.py
+index 670403d9..c0938c25 100644
+--- a/src/utils.py
++++ b/src/utils.py
+@@ -25,7 +25,6 @@ _format_g = pymupdf.format_g
+ 
+ g_exceptions_verbose = pymupdf.g_exceptions_verbose
+ 
+-TESSDATA_PREFIX = os.environ.get("TESSDATA_PREFIX")
+ point_like = "point_like"
+ rect_like = "rect_like"
+ matrix_like = "matrix_like"
+@@ -587,8 +586,6 @@ def get_textpage_ocr(
+         full: (bool) whether to OCR the full page image, or only its images (default)
+     """
+     pymupdf.CheckParent(page)
+-    if not TESSDATA_PREFIX and not tessdata:
+-        raise RuntimeError("No OCR support: TESSDATA_PREFIX not set")
+ 
+     def full_ocr(page, dpi, language, flags):
+         zoom = dpi / 72
+diff --git a/tests/test_tesseract.py b/tests/test_tesseract.py
+index 92212b98..559dde3e 100644
+--- a/tests/test_tesseract.py
++++ b/tests/test_tesseract.py
+@@ -8,11 +8,9 @@ def test_tesseract():
+     This checks that MuPDF has been built with tesseract support.
+ 
+     By default we don't supply a valid `tessdata` directory, and just assert
+-    that attempting to use Tesseract raises the expected error (which checks
+-    that MuPDF is built with Tesseract support).
+-
+-    But if TESSDATA_PREFIX is set in the environment, we assert that
+-    FzPage.get_textpage_ocr() succeeds.
++    that attempting to use Tesseract either works (`tessdata` set up) or
++    raises the expected error (which checks that MuPDF is built with Tesseract
++    support).
+     '''
+     path = os.path.abspath( f'{__file__}/../resources/2.pdf')
+     doc = pymupdf.open( path)
+@@ -35,24 +33,18 @@ def test_tesseract():
+         # classic.
+         e_expected = 'OCR initialisation failed'
+         e_expected_type = None
+-    tessdata_prefix = os.environ.get('TESSDATA_PREFIX')
+-    if tessdata_prefix:
++    try:
+         tp = page.get_textpage_ocr(full=True)
+         print(f'test_tesseract(): page.get_textpage_ocr() succeeded')
+-    else:
+-        try:
+-            tp = page.get_textpage_ocr(full=True, tessdata='/foo/bar')
+-        except Exception as e:
+-            e_text = str(e)
+-            print(f'Received exception as expected.')
+-            print(f'{type(e)=}')
+-            print(f'{e_text=}')
+-            assert e_text == e_expected, f'Unexpected exception: {e_text!r}'
+-            if e_expected_type:
+-                print(f'{e_expected_type=}')
+-                assert type(e) == e_expected_type, f'{type(e)=} != {e_expected_type=}.'
+-        else:
+-            assert 0, f'Expected exception {e_expected!r}'
++    except Exception as e:
++        e_text = str(e)
++        print(f'Received exception as expected.')
++        print(f'{type(e)=}')
++        print(f'{e_text=}')
++        assert e_text == e_expected, f'Unexpected exception: {e_text!r}'
++        if e_expected_type:
++            print(f'{e_expected_type=}')
++            assert type(e) == e_expected_type, f'{type(e)=} != {e_expected_type=}.'
+         rebased = hasattr(pymupdf, 'mupdf')
+         if rebased:
+             wt = pymupdf.TOOLS.mupdf_warnings()
+-- 
+2.46.0.444.g7c79821ace
+

@@ -22,8 +22,7 @@ URL:		https://github.com/pymupdf/PyMuPDF
 Source0:	{{{ GIT_DIRTY=1 git_pack path=source dir_name=PyMuPDF }}}
 Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
-Patch:		0001-use-get_tessdata-in-test.patch
-Patch:		0002-adjust-tesseract-tessdata-path-to-Fedora-default.patch
+Patch:		0001-Use-tessdata-the-same-as-mupdf-and-tesseract-do.patch
 
 BuildRequires:	python3-devel
 BuildRequires:	python3-fonttools
