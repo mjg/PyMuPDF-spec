@@ -1,0 +1,27 @@
+From 413ff7c245b618023b7ff4304bc4f0136bbd3a09 Mon Sep 17 00:00:00 2001
+Message-ID: <413ff7c245b618023b7ff4304bc4f0136bbd3a09.1727519196.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Sat, 28 Sep 2024 12:26:31 +0200
+Subject: [PATCH] adjust to mupdf git change
+
+---
+ tests/test_general.py | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/tests/test_general.py b/tests/test_general.py
+index ea2696f3..5d6a2f56 100644
+--- a/tests/test_general.py
++++ b/tests/test_general.py
+@@ -1346,8 +1346,7 @@ def test_3859():
+         print(f'{pymupdf.mupdf.PDF_NULL=}.')
+         print(f'{pymupdf.mupdf.PDF_TRUE=}.')
+         print(f'{pymupdf.mupdf.PDF_FALSE=}.')
+-        print(f'{pymupdf.mupdf.PDF_LIMIT=}.')
+-        for name in ('NULL', 'TRUE', 'FALSE', 'LIMIT'):
++        for name in ('NULL', 'TRUE', 'FALSE'):
+             name2 = f'PDF_{name}'
+             v = getattr(pymupdf.mupdf, name2)
+             print(f'{name=} {name2=} {v=} {type(v)=}')
+-- 
+2.47.0.rc0.193.g5a85c1ce53
+
