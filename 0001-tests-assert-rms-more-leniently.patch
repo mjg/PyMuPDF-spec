@@ -1,0 +1,38 @@
+From b7e8d69c073dc6d6c24ede9c051bad5a61ba377e Mon Sep 17 00:00:00 2001
+Message-ID: <b7e8d69c073dc6d6c24ede9c051bad5a61ba377e.1727973627.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Thu, 3 Oct 2024 18:38:41 +0200
+Subject: [PATCH] tests: assert rms more leniently
+
+The new tests assert for rms == 0 even though the compared images are
+renders and - as such - depend on details of the rendering library.
+Assert them more leniently, and still strict enough to be an order of
+magnitude away from the failure case.
+---
+ tests/test_annots.py  | 2 +-
+ tests/test_general.py | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tests/test_annots.py b/tests/test_annots.py
+index c9925eff..d155cbc6 100644
+--- a/tests/test_annots.py
++++ b/tests/test_annots.py
+@@ -416,4 +416,4 @@ def test_3863():
+             print(f'{path_png=}.')
+             print(f'{path_png_expected=}.')
+             rms = gentle_compare.pixmaps_rms(path_png, path_png_expected, '    ')
+-            assert rms == 0
++            assert rms < 0.5
+diff --git a/tests/test_general.py b/tests/test_general.py
+index 2324a578..09ba0b8e 100644
+--- a/tests/test_general.py
++++ b/tests/test_general.py
+@@ -1380,4 +1380,4 @@ def test_3624():
+         if pymupdf.mupdf_version_tuple < (1, 24, 10):
+             assert rms > 12
+         else:
+-            assert rms == 0
++            assert rms < 0.5
+-- 
+2.47.0.rc1.228.g78d37aec9c
+

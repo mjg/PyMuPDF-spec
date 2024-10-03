@@ -12,7 +12,7 @@
 
 Name:		python-%{pypi_name}
 Version:	%{gitdescribefedversion}
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:	AGPL-3.0-or-later
@@ -23,6 +23,7 @@ Source0:	{{{ GIT_DIRTY=1 git_pack path=source dir_name=PyMuPDF }}}
 Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-Use-tessdata-the-same-as-mupdf-and-tesseract-do.patch
+Patch:		0001-tests-assert-rms-more-leniently.patch
 
 BuildRequires:	python3-devel
 BuildRequires:	python3-fonttools
