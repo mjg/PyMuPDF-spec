@@ -88,6 +88,8 @@ export PYMUPDF_SETUP_MUPDF_BUILD_TYPE='debug'
 export PYMUPDF_SETUP_MUPDF_BUILD=''
 # build rebased implementation only:
 export PYMUPDF_SETUP_IMPLEMENTATIONS='b'
+# build breaks on F39/EL9 with limited API, and we depend on py version anyways:
+export PYMUPDF_SETUP_PY_LIMITED_API=0
 CFLAGS="$CFLAGS -I/usr/include -I/usr/include/freetype2 -I/usr/include/mupdf"
 LDFLAGS="$LDFLAGS -lfreetype -lmupdf"
 %pyproject_wheel
