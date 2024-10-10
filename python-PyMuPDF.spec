@@ -30,6 +30,8 @@ BuildRequires:	python3-pillow
 BuildRequires:	python3-pip
 BuildRequires:	python3-psutil
 BuildRequires:	python3-pytest
+# test dependency
+BuildRequires:	tesseract-langpack-eng
 %if %{with docs}
 BuildRequires:	python3-sphinx
 BuildRequires:	python3-sphinx-copybutton
@@ -73,7 +75,11 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %endif
 
 %prep
-%autosetup -n PyMuPDF -p 1
+%autosetup -n %{pypi_name} -p 1
+
+# We do not use generate_buildrequires for various reasons:
+# - setup.py gives libclang and swig which we do not have as py3dist(x)
+# - doc build requirements should be conditional
 
 %build
 # generate debug symbols
@@ -91,6 +97,7 @@ sphinx-build docs docs_built
 
 %install
 %pyproject_install
+%pyproject_save_files -L %{module_name} %{module_name_compat}
 
 %check
 # linters have no place in distro build tests
@@ -117,12 +124,9 @@ SKIP="$SKIP and not test_htmlbox1"
 SKIP="$SKIP and not test_insert and not test_3087"
 %pytest -k "$SKIP"
 
-%files -n python3-%{pypi_name}
+%files -n python3-%{pypi_name} -f %{pyproject_files}
 %license COPYING
 %{_bindir}/pymupdf
-%{python3_sitearch}/%{module_name}/
-%{python3_sitearch}/PyMuPDF*
-%{python3_sitearch}/%{module_name_compat}/
 
 %if %{with docs}
 %files doc
