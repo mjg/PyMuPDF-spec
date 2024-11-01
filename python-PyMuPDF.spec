@@ -23,14 +23,11 @@ Source0:	{{{ GIT_DIRTY=1 git_pack path=source dir_name=PyMuPDF }}}
 Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-Use-tessdata-the-same-as-mupdf-and-tesseract-do.patch
+Patch:		0001-setup.py-do-not-require-libclang-and-swig.patch
 
-BuildRequires:	python3-devel
-BuildRequires:	python3-fonttools
-BuildRequires:	python3-pillow
-BuildRequires:	python3-pip
-BuildRequires:	python3-psutil
-BuildRequires:	python3-pytest
-# test dependency
+# test dependencies not picked up by generator
+BuildRequires:	python3dist(pillow)
+BuildRequires:	python3dist(pytest)
 BuildRequires:	tesseract-langpack-eng
 %if %{with docs}
 BuildRequires:	python3-sphinx
@@ -77,9 +74,8 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %prep
 %autosetup -n %{pypi_name} -p 1
 
-# We do not use generate_buildrequires for various reasons:
-# - setup.py gives libclang and swig which we do not have as py3dist(x)
-# - doc build requirements should be conditional
+%generate_buildrequires
+%pyproject_buildrequires -R
 
 %build
 # generate debug symbols

@@ -1,0 +1,35 @@
+From 7362c06941440677d92b46a23dc00c2df0aa4577 Mon Sep 17 00:00:00 2001
+Message-ID: <7362c06941440677d92b46a23dc00c2df0aa4577.1730415300.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Thu, 31 Oct 2024 23:53:31 +0100
+Subject: [PATCH] setup.py: do not require libclang and swig
+
+libclang and swig may be present but under different package names (e.g.
+on Fedora), so do not add them to the requirements by default.
+---
+ setup.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index a1c0d601..2d1ec918 100755
+--- a/setup.py
++++ b/setup.py
+@@ -1261,13 +1261,13 @@ else:
+             # There are still of problems when building on old macos.
+             ret.append('libclang==14.0.6')
+         else:
+-            ret.append('libclang')
++            pass
+         if msys2:
+             print(f'msys2: pip install of swig does not build; assuming `pacman -S swig`.')
+         elif openbsd:
+             print(f'OpenBSD: pip install of swig does not build; assuming `pkg_add swig`.')
+         else:
+-            ret.append( 'swig')
++            pass
+         return ret
+ 
+ 
+-- 
+2.47.0.285.g5ef4903f31
+
