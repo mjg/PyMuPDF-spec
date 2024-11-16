@@ -1,0 +1,40 @@
+From da3f3afba8d385e7f4429064ccf1800681c44c64 Mon Sep 17 00:00:00 2001
+Message-ID: <da3f3afba8d385e7f4429064ccf1800681c44c64.1731787348.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Sat, 16 Nov 2024 21:02:22 +0100
+Subject: [PATCH] argb has been backported to 1.25.x
+
+---
+ src/__init__.py | 2 +-
+ src/extra.i     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/__init__.py b/src/__init__.py
+index 9b5ff266..6834c630 100644
+--- a/src/__init__.py
++++ b/src/__init__.py
+@@ -16550,7 +16550,7 @@ def JM_make_spanlist(line_dict, line, raw, buff, tp_rect):
+         style.size = ch.m_internal.size
+         style.flags = flags
+         style.font = JM_font_name(mupdf.FzFont(mupdf.ll_fz_keep_font(ch.m_internal.font)))
+-        if mupdf_version_tuple >= (1, 26):
++        if mupdf_version_tuple >= (1, 25):
+             style.color = ch.m_internal.argb
+         else:
+             style.color = ch.m_internal.color
+diff --git a/src/extra.i b/src/extra.i
+index 5c1d7910..75b56763 100644
+--- a/src/extra.i
++++ b/src/extra.i
+@@ -3064,7 +3064,7 @@ mupdf::FzRect JM_make_spanlist(
+         style.size = ch.m_internal->size;
+         style.flags = flags;
+         style.font = JM_font_name(ch.m_internal->font);
+-        #if (FZ_VERSION_MAJOR > 1 || (FZ_VERSION_MAJOR == 1 && FZ_VERSION_MINOR >= 26))
++        #if (FZ_VERSION_MAJOR > 1 || (FZ_VERSION_MAJOR == 1 && FZ_VERSION_MINOR >= 25))
+             style.color = ch.m_internal->argb;
+         #else
+             style.color = ch.m_internal->color;
+-- 
+2.47.0.384.ge5b746d082
+
