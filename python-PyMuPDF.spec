@@ -73,6 +73,8 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 
 %prep
 %autosetup -n %{pypi_name} -p 1
+# disable google analytics for installed doc
+sed -i -e "s/,'sphinxcontrib.googleanalytics'//" docs/conf.py
 
 %generate_buildrequires
 %pyproject_buildrequires -R
