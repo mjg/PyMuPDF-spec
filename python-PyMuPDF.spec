@@ -24,7 +24,6 @@ Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-Use-tessdata-the-same-as-mupdf-and-tesseract-do.patch
 Patch:		0001-setup.py-do-not-require-libclang-and-swig.patch
-Patch:		0001-unbreak-local-builds.patch
 
 # test dependencies not picked up by generator
 BuildRequires:	python3dist(pillow)
