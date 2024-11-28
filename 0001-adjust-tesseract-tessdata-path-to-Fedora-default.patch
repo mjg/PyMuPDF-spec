@@ -1,0 +1,60 @@
+From 4d0001aef4295eb8d3ff36310c6014b1458b8c8d Mon Sep 17 00:00:00 2001
+Message-ID: <4d0001aef4295eb8d3ff36310c6014b1458b8c8d.1732826746.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Mon, 25 Sep 2023 20:36:37 +0200
+Subject: [PATCH] adjust tesseract tessdata path to Fedora default
+
+In fact, we determine the path from `tesseract --list-langs` which gives
+exactly what `tesseract` sees. (We also change the debian-specific
+command name `tesseract-ocr` back to upstream's `tesseract` and lose the
+dependency on `whereis`.)
+---
+ src/__init__.py             | 16 ++++------------
+ src_classic/helper-python.i |  2 +-
+ 2 files changed, 5 insertions(+), 13 deletions(-)
+
+diff --git a/src/__init__.py b/src/__init__.py
+index 61450f50..ff1033e6 100644
+--- a/src/__init__.py
++++ b/src/__init__.py
+@@ -18346,20 +18346,12 @@ def get_tessdata(tessdata=None):
+             raise RuntimeError("No tessdata specified and Tesseract installation has no {tessdata} folder")
+ 
+     # Unix-like systems:
+-    cp = subprocess.run("whereis tesseract-ocr", shell=1, capture_output=1, check=0, text=True)
+-    response = cp.stdout.strip().split()
+-    if cp.returncode or len(response) != 2:  # if not 2 tokens: no tesseract-ocr
++    cp = subprocess.run("tesseract --list-langs", shell=1, capture_output=1, check=0, text=True)
++    response = cp.stdout.strip().split('"')
++    if cp.returncode or len(response) != 3:  # if not 3 tokens: no tesseract
+         raise RuntimeError("No tessdata specified and Tesseract is not installed")
+ 
+-    # search tessdata in folder structure
+-    dirname = response[1]  # contains tesseract-ocr installation folder
+-    pattern = f"{dirname}/*/tessdata"
+-    tessdatas = glob.glob(pattern)
+-    tessdatas.sort()
+-    if tessdatas:
+-        return tessdatas[-1]
+-    else:
+-        raise RuntimeError("No tessdata specified and Tesseract installation has no {pattern} folder.")
++    return response[1]
+ 
+ 
+ def css_for_pymupdf_font(
+diff --git a/src_classic/helper-python.i b/src_classic/helper-python.i
+index 6ca431e1..01663cf7 100644
+--- a/src_classic/helper-python.i
++++ b/src_classic/helper-python.i
+@@ -2098,7 +2098,7 @@ def get_tessdata() -> str:
+     if sys.platform == "win32":
+         tessdata = "C:\\Program Files\\Tesseract-OCR\\tessdata"
+     else:
+-        tessdata = "/usr/share/tesseract-ocr/4.00/tessdata"
++        tessdata = "/usr/share/tesseract/tessdata"
+ 
+     if os.path.exists(tessdata):
+         return tessdata
+-- 
+2.47.1.494.g038620d8da
+

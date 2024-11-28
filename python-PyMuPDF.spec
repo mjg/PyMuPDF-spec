@@ -22,7 +22,7 @@ URL:		https://github.com/pymupdf/PyMuPDF
 Source0:	{{{ GIT_DIRTY=1 git_pack path=source dir_name=PyMuPDF }}}
 Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
-Patch:		0001-Use-tessdata-the-same-as-mupdf-and-tesseract-do.patch
+Patch:		0001-adjust-tesseract-tessdata-path-to-Fedora-default.patch
 Patch:		0001-setup.py-do-not-require-libclang-and-swig.patch
 Patch:		0001-argb-has-been-backported-to-1.25.x.patch
 
