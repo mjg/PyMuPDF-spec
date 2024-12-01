@@ -24,11 +24,12 @@ Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-adjust-tesseract-tessdata-path-to-Fedora-default.patch
 Patch:		0001-setup.py-do-not-require-libclang-and-swig.patch
-Patch:		0001-argb-has-been-backported-to-1.25.x.patch
+Patch:		0001-test_3854-be-more-lenient.patch
 
 # test dependencies not picked up by generator
 BuildRequires:	python3dist(pillow)
 BuildRequires:	python3dist(pytest)
+BuildRequires:	python3dist(psutil)
 BuildRequires:	tesseract-langpack-eng
 %if %{with docs}
 BuildRequires:	python3-sphinx

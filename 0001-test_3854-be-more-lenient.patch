@@ -1,0 +1,26 @@
+From e5ce108c44469600802a344c3f4fb968419624ed Mon Sep 17 00:00:00 2001
+Message-ID: <e5ce108c44469600802a344c3f4fb968419624ed.1733067506.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Sun, 1 Dec 2024 16:36:49 +0100
+Subject: [PATCH] test_3854: be more lenient
+
+jpeg rendering depends on the exact library used. Be slightly more
+lenient when doing the "gentle compare". In particular, this fixes test
+failure with Fedora's libjpeg-turbo.
+---
+ tests/test_pixmap.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/test_pixmap.py b/tests/test_pixmap.py
+index 83d00916..25c190a9 100644
+--- a/tests/test_pixmap.py
++++ b/tests/test_pixmap.py
+@@ -426,4 +426,4 @@ def test_3854():
+     
+     rms = gentle_compare.pixmaps_rms(pixmap, pixmap_expected)
+     print(f'{rms=}.')
+-    assert rms == 0
++    assert rms < 1
+-- 
+2.47.1.494.g038620d8da
+
