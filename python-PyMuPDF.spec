@@ -24,7 +24,6 @@ Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-adjust-tesseract-tessdata-path-to-Fedora-default.patch
 Patch:		0001-setup.py-do-not-require-libclang-and-swig.patch
-Patch:		0001-test_3854-be-more-lenient.patch
 
 # test dependencies not picked up by generator
 BuildRequires:	python3dist(pillow)
@@ -124,6 +123,7 @@ SKIP="$SKIP and not test_htmlbox1"
 %endif
 # spuriously failing tests (several archs)
 SKIP="$SKIP and not test_insert and not test_3087"
+export PYMUPDF_SYSINSTALL_TEST=1
 %pytest -k "$SKIP"
 
 %files -n python3-%{pypi_name} -f %{pyproject_files}
