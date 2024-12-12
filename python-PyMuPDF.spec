@@ -20,6 +20,7 @@ URL:		https://github.com/pymupdf/PyMuPDF
 # rpkg's git_pack does not cope well with submodules, so we force it to assume a dirty tree.
 # The tree is unmodified (before possibly applying patches).
 Source0:	{{{ GIT_DIRTY=1 git_pack path=source dir_name=PyMuPDF }}}
+
 Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-adjust-tesseract-tessdata-path-to-Fedora-default.patch
