@@ -1,0 +1,41 @@
+From 55bbd382596abce1efc18e065ac949edeac9e212 Mon Sep 17 00:00:00 2001
+Message-ID: <55bbd382596abce1efc18e065ac949edeac9e212.1736002973.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Sat, 4 Jan 2025 16:01:02 +0100
+Subject: [PATCH] Pixmap: ensure the destructor does not raise an attribute
+ error
+
+The recently added destructor assumes that there is an attribute
+`_samples_mv` on self. Ensure there is one no matter what happens on
+init, or else the destructor may raise an attribute error.
+---
+ src/__init__.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/__init__.py b/src/__init__.py
+index 39698dbd..2a73fdb4 100644
+--- a/src/__init__.py
++++ b/src/__init__.py
+@@ -9793,6 +9793,9 @@ class Pixmap:
+         Pixmap(colorspace, width, height, samples, alpha) - from samples data.
+         Pixmap(PDFdoc, xref) - from an image at xref in a PDF document.
+         """
++        
++        # Cache for property `self.samples_mv`.
++        self._samples_mv = None
+         if 0:
+             pass
+ 
+@@ -10059,9 +10062,6 @@ class Pixmap:
+         # data.  Doesn't seem to make much difference to Pixmap.set_pixel() so
+         # not currently used.
+         self._memory_view = None
+-        
+-        # Cache for property `self.samples_mv`.
+-        self._samples_mv = None
+ 
+     def __len__(self):
+         return self.size
+-- 
+2.48.0.rc1.202.gd79353f962
+
