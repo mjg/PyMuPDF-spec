@@ -116,6 +116,10 @@ SKIP="$SKIP and not test_3050"
 SKIP="$SKIP and not test_subset_fonts"
 # test_fit_springer depends on font library version (harfbuzz etc)
 SKIP="$SKIP and not test_fit_springer"
+# test_spikes uses a binary diff on rendered images
+SKIP="$SKIP and not test_spikes"
+# these compare renderings with system fonts or missing fonts
+SKIP="$SKIP and not test_4180 and not test_4182 and not test_4245"
 %ifarch s390 s390x
 # test_3087 crashes on s390 s390x (bigendian mask problem?)
 SKIP="$SKIP and not test_3087"
