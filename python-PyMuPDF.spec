@@ -110,12 +110,16 @@ SKIP="$SKIP and not test_fontarchive"
 SKIP="$SKIP and not test_flake8"
 # test_2791 fails sporadically with its empiric bounds
 SKIP="$SKIP and not test_2791"
+# test_3050 is known to fail for distribution builds
+SKIP="$SKIP and not test_3050"
 # test_subset_fonts needs pymupdf_fonts
 SKIP="$SKIP and not test_subset_fonts"
 # test_fit_springer depends on font library version (harfbuzz etc)
 SKIP="$SKIP and not test_fit_springer"
 # test_spikes uses a binary diff on rendered images
 SKIP="$SKIP and not test_spikes"
+# these compare renderings with system fonts or missing fonts
+SKIP="$SKIP and not test_4180"
 %ifarch s390 s390x
 # test_3087 crashes on s390 s390x (bigendian mask problem?)
 SKIP="$SKIP and not test_3087"
