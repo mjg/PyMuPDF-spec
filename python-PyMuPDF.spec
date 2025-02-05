@@ -90,7 +90,9 @@ export PYMUPDF_SETUP_MUPDF_BUILD=''
 export PYMUPDF_SETUP_IMPLEMENTATIONS='b'
 # build breaks on F39/EL9 with limited API, and we depend on py version anyways:
 export PYMUPDF_SETUP_PY_LIMITED_API=0
+%if 0%{?rhel} && 0%{?rhel} <= 9
 %set_build_flags
+%endif
 CFLAGS="$CFLAGS -I/usr/include -I/usr/include/freetype2 -I/usr/include/mupdf"
 LDFLAGS="$LDFLAGS -lfreetype -lmupdf"
 %pyproject_wheel
@@ -120,7 +122,7 @@ SKIP="$SKIP and not test_fit_springer"
 # test_spikes uses a binary diff on rendered images
 SKIP="$SKIP and not test_spikes"
 # these compare renderings with system fonts or missing fonts
-SKIP="$SKIP and not test_4180"
+SKIP="$SKIP and not test_1645 and not test_4180"
 %ifarch s390 s390x
 # test_3087 crashes on s390 s390x (bigendian mask problem?)
 SKIP="$SKIP and not test_3087"
