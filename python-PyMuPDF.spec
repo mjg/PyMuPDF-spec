@@ -90,7 +90,7 @@ export PYMUPDF_SETUP_MUPDF_BUILD=''
 export PYMUPDF_SETUP_IMPLEMENTATIONS='b'
 # build breaks on F39/EL9 with limited API, and we depend on py version anyways:
 export PYMUPDF_SETUP_PY_LIMITED_API=0
-%if 0%{?rhel} <= 9
+%if 0%{?rhel} && 0%{?rhel} <= 9
 %set_build_flags
 %endif
 CFLAGS="$CFLAGS -I/usr/include -I/usr/include/freetype2 -I/usr/include/mupdf"
