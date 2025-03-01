@@ -123,6 +123,8 @@ SKIP="$SKIP and not test_fit_springer"
 SKIP="$SKIP and not test_spikes"
 # these compare renderings with system fonts or missing fonts
 SKIP="$SKIP and not test_1645 and not test_4180"
+# we build without barcode support
+SKIP="$SKIP and not test_barcode"
 %ifarch s390 s390x
 # test_3087 crashes on s390 s390x (bigendian mask problem?)
 SKIP="$SKIP and not test_3087"
