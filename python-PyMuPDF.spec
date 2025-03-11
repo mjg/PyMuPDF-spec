@@ -10,6 +10,9 @@
 
 %bcond docs %{defined fedora}
 
+# mupdf barcode support is available on Fedora copr git build only
+%bcond barcode %[ %{defined fedora} && %["%copr_projectname" == "mupdf-git"] ] 
+
 Name:		python-%{pypi_name}
 Version:	%{gitdescribefedversion}
 Release:	1%{?dist}
@@ -124,8 +127,10 @@ SKIP="$SKIP and not test_fit_springer"
 SKIP="$SKIP and not test_spikes"
 # these compare renderings with system fonts or missing fonts
 SKIP="$SKIP and not test_1645 and not test_4180"
-# we build without barcode support
+%if %{without barcode}
+# we build mupdf without barcode support
 SKIP="$SKIP and not test_barcode"
+%endif
 %ifarch s390 s390x
 # test_3087 crashes on s390 s390x (bigendian mask problem?)
 SKIP="$SKIP and not test_3087"
