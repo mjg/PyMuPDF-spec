@@ -1,0 +1,177 @@
+From a487b9905e7f7305cd11250a8690a9e39ba41b92 Mon Sep 17 00:00:00 2001
+Message-ID: <a487b9905e7f7305cd11250a8690a9e39ba41b92.1741961549.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Fri, 14 Mar 2025 15:11:09 +0100
+Subject: [PATCH] adjust to python 3.14
+
+`typing.ByteString` has been deprecated since python 3.12 will be
+removed in python 3.14. For now, use a union type alias rather than
+identifying the minimal interface.
+---
+ src/__init__.py             | 15 +++++++++++----
+ src/utils.py                | 10 +++++++++-
+ src_classic/fitz_old.i      | 14 +++++++++++---
+ src_classic/helper-python.i |  2 +-
+ src_classic/utils.py        | 10 +++++++++-
+ 5 files changed, 41 insertions(+), 10 deletions(-)
+
+diff --git a/src/__init__.py b/src/__init__.py
+index 2915bdd3..1d980ba0 100644
+--- a/src/__init__.py
++++ b/src/__init__.py
+@@ -419,8 +419,15 @@ def _format_g(value, *, fmt='%g'):
+         
+ format_g = _format_g
+ 
++# ByteString is gone from typing in 3.14.
++# collections.abc.Buffer available from 3.12 only
++try:
++    ByteString = typing.ByteString
++except AttributeError:
++    ByteString = bytes | bytearray | memoryview
++
+ # Names required by class method typing annotations.
+-OptBytes = typing.Optional[typing.ByteString]
++OptBytes = typing.Optional[ByteString]
+ OptDict = typing.Optional[dict]
+ OptFloat = typing.Optional[float]
+ OptInt = typing.Union[int, None]
+@@ -3979,7 +3986,7 @@ class Document:
+ 
+     def embfile_add(self,
+             name: str,
+-            buffer_: typing.ByteString,
++            buffer_: ByteString,
+             filename: OptStr =None,
+             ufilename: OptStr =None,
+             desc: OptStr =None,
+@@ -8282,7 +8289,7 @@ class Page:
+     def add_file_annot(
+             self,
+             point: point_like,
+-            buffer_: typing.ByteString,
++            buffer_: ByteString,
+             filename: str,
+             ufilename: OptStr =None,
+             desc: OptStr =None,
+@@ -18379,7 +18386,7 @@ def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encod
+     raise ValueError("Font '%s' is unsupported" % fontname)
+ 
+ 
+-def image_profile(img: typing.ByteString) -> dict:
++def image_profile(img: ByteString) -> dict:
+     """ Return basic properties of an image.
+ 
+     Args:
+diff --git a/src/utils.py b/src/utils.py
+index d693f339..ec13f160 100644
+--- a/src/utils.py
++++ b/src/utils.py
+@@ -29,12 +29,20 @@ point_like = "point_like"
+ rect_like = "rect_like"
+ matrix_like = "matrix_like"
+ quad_like = "quad_like"
++
++# ByteString is gone from typing in 3.14.
++# collections.abc.Buffer available from 3.12 only
++try:
++    ByteString = typing.ByteString
++except AttributeError:
++    ByteString = bytes | bytearray | memoryview
++
+ AnyType = typing.Any
+ OptInt = typing.Union[int, None]
+ OptFloat = typing.Optional[float]
+ OptStr = typing.Optional[str]
+ OptDict = typing.Optional[dict]
+-OptBytes = typing.Optional[typing.ByteString]
++OptBytes = typing.Optional[ByteString]
+ OptSeq = typing.Optional[typing.Sequence]
+ 
+ """
+diff --git a/src_classic/fitz_old.i b/src_classic/fitz_old.i
+index 2afbe62d..8abc8955 100644
+--- a/src_classic/fitz_old.i
++++ b/src_classic/fitz_old.i
+@@ -321,12 +321,20 @@ point_like = "point_like"
+ rect_like = "rect_like"
+ matrix_like = "matrix_like"
+ quad_like = "quad_like"
++
++# ByteString is gone from typing in 3.14.
++# collections.abc.Buffer available from 3.12 only
++try:
++    ByteString = typing.ByteString
++except AttributeError:
++    ByteString = bytes | bytearray | memoryview
++
+ AnyType = typing.Any
+ OptInt = typing.Union[int, None]
+ OptFloat = typing.Optional[float]
+ OptStr = typing.Optional[str]
+ OptDict = typing.Optional[dict]
+-OptBytes = typing.Optional[typing.ByteString]
++OptBytes = typing.Optional[ByteString]
+ OptSeq = typing.Optional[typing.Sequence]
+ 
+ try:
+@@ -1342,7 +1350,7 @@ struct Document
+             self.xref_set_key(xref, "Params/ModDate", get_pdf_str(date))
+             return xref
+ 
+-        def embfile_add(self, name: str, buffer: typing.ByteString,
++        def embfile_add(self, name: str, buffer: ByteString,
+                                   filename: OptStr =None,
+                                   ufilename: OptStr =None,
+                                   desc: OptStr =None,) -> None:
+@@ -5964,7 +5972,7 @@ struct Page {
+ 
+ 
+         def add_file_annot(self, point: point_like,
+-            buffer: typing.ByteString,
++            buffer: ByteString,
+             filename: str,
+             ufilename: OptStr =None,
+             desc: OptStr =None,
+diff --git a/src_classic/helper-python.i b/src_classic/helper-python.i
+index 6ca431e1..9a14a5df 100644
+--- a/src_classic/helper-python.i
++++ b/src_classic/helper-python.i
+@@ -1245,7 +1245,7 @@ def planish_line(p1: point_like, p2: point_like) -> Matrix:
+     return Matrix(util_hor_matrix(p1, p2))
+ 
+ 
+-def image_profile(img: typing.ByteString) -> dict:
++def image_profile(img: ByteString) -> dict:
+     """ Return basic properties of an image.
+ 
+     Args:
+diff --git a/src_classic/utils.py b/src_classic/utils.py
+index 39512970..c1369afb 100644
+--- a/src_classic/utils.py
++++ b/src_classic/utils.py
+@@ -23,12 +23,20 @@ point_like = "point_like"
+ rect_like = "rect_like"
+ matrix_like = "matrix_like"
+ quad_like = "quad_like"
++
++# ByteString is gone from typing in 3.14.
++# collections.abc.Buffer available from 3.12 only
++try:
++    ByteString = typing.ByteString
++except AttributeError:
++    ByteString = bytes | bytearray | memoryview
++
+ AnyType = typing.Any
+ OptInt = typing.Union[int, None]
+ OptFloat = typing.Optional[float]
+ OptStr = typing.Optional[str]
+ OptDict = typing.Optional[dict]
+-OptBytes = typing.Optional[typing.ByteString]
++OptBytes = typing.Optional[ByteString]
+ OptSeq = typing.Optional[typing.Sequence]
+ 
+ """
+-- 
+2.49.0.rc2.443.g7b1a10e473
+
