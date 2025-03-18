@@ -30,6 +30,7 @@ Patch:		0001-adjust-tesseract-tessdata-path-to-Fedora-default.patch
 Patch:		0001-setup.py-do-not-require-libclang-and-swig.patch
 # https://github.com/pymupdf/PyMuPDF/pull/4374
 Patch:		0001-adjust-to-python-3.14.patch
+Patch:		0001-clip-handling-do-not-throw-with-older-mupdf.patch
 
 # test dependencies not picked up by generator
 BuildRequires:	python3dist(pillow)

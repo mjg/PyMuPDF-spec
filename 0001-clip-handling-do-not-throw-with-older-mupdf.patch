@@ -1,0 +1,49 @@
+From 076865d71a2b2bd786ef1d68b243a42b1a1a7eb1 Mon Sep 17 00:00:00 2001
+Message-ID: <076865d71a2b2bd786ef1d68b243a42b1a1a7eb1.1742400816.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Tue, 18 Mar 2025 17:40:36 +0100
+Subject: [PATCH] clip handling: do not throw with older mupdf
+
+FZ_STEXT_CLIP_RECT was introduced in the 1.26 series only. Do not throw
+an error without it, and adjust test expectations.
+---
+ src/__init__.py      | 5 ++++-
+ tests/test_annots.py | 6 +++++-
+ 2 files changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/src/__init__.py b/src/__init__.py
+index 1ccc7677..60e952aa 100644
+--- a/src/__init__.py
++++ b/src/__init__.py
+@@ -1026,7 +1026,10 @@ class Annot:
+         if clip:
+             clip2 = JM_rect_from_py(clip)
+             options.clip = clip2.internal()
+-            options.flags |= mupdf.FZ_STEXT_CLIP_RECT
++            try:
++                options.flags |= mupdf.FZ_STEXT_CLIP_RECT
++            except AttributeError:
++                pass # mupdf too old
+         annot = self.this
+         stextpage = mupdf.FzStextPage(annot, options)
+         ret = TextPage(stextpage)
+diff --git a/tests/test_annots.py b/tests/test_annots.py
+index ad88576b..7f8fd0c4 100644
+--- a/tests/test_annots.py
++++ b/tests/test_annots.py
+@@ -304,7 +304,11 @@ def test_2270():
+                     textpage2 = textBox.get_textpage(clip=clip)
+                     text = textpage2.extractText()
+                     print(f'With {clip=}: {text=}')
+-                    assert text == 'ab\n'
++                    if hasattr(pymupdf.mupdf, 'FZ_STEXT_CLIP_RECT'):
++                        expect = 'ab\n'
++                    else:
++                        expect = 'abc123\n'
++                    assert text == expect
+                     
+ 
+ def test_2934_add_redact_annot():
+-- 
+2.49.0.411.ga69ce1a3a8
+
