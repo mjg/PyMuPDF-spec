@@ -112,6 +112,8 @@ sphinx-build docs docs_built
 SKIP="not test_codespell and not test_pylint"
 # test_fontarchives tries to download special module via pip
 SKIP="$SKIP and not test_fontarchive"
+# test_open2 requires a git checkout
+SKIP="$SKIP and not test_open2"
 # flake8 has no place in downstream packaging
 SKIP="$SKIP and not test_flake8"
 # test_2791 fails sporadically with its empiric bounds
