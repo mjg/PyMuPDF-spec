@@ -128,6 +128,8 @@ SKIP="$SKIP and not test_fit_springer"
 SKIP="$SKIP and not test_spikes"
 # these compare renderings with system fonts or missing fonts
 SKIP="$SKIP and not test_1645 and not test_4180"
+# test downloads data from the internet
+SKIP="$SKIP and not test_4445 and not test_4457"
 %if %{without barcode}
 # we build mupdf without barcode support
 SKIP="$SKIP and not test_barcode"
@@ -142,7 +144,7 @@ SKIP="$SKIP and not test_htmlbox1"
 SKIP="$SKIP and not test_insert and not test_3087"
 # test is known to fail with legacy series mupdf
 %if %["%copr_projectname" == "mupdf-git-1.25.x"]
-SKIP="$SKIP and not test_4363"
+SKIP="$SKIP and not test_4363 and not test_4435 and not test_4479"
 %endif
 export PYMUPDF_SYSINSTALL_TEST=1
 %pytest -k "$SKIP"
