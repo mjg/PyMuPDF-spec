@@ -1,0 +1,93 @@
+From f64ecc2066e79e0509a68c200514eb7e4ae6476c Mon Sep 17 00:00:00 2001
+Message-ID: <f64ecc2066e79e0509a68c200514eb7e4ae6476c.1749043999.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Wed, 4 Jun 2025 15:30:42 +0200
+Subject: [PATCH] tests: adjust to verbose font warning
+
+---
+ tests/test_font.py    | 2 +-
+ tests/test_general.py | 6 +++---
+ tests/test_pixmap.py  | 4 ++--
+ tests/test_tables.py  | 3 +--
+ 4 files changed, 7 insertions(+), 8 deletions(-)
+
+diff --git a/tests/test_font.py b/tests/test_font.py
+index 4cc85775..e252ceb8 100644
+--- a/tests/test_font.py
++++ b/tests/test_font.py
+@@ -318,4 +318,4 @@ def test_4457():
+     # Avoid test failure caused by mupdf warnings.
+     wt = pymupdf.TOOLS.mupdf_warnings()
+     print(f'{wt=}')
+-    assert wt == 'bogus font ascent/descent values (0 / 0)\n... repeated 5 times...'
++    assert 'bogus font ascent/descent values (0 / 0)' in wt
+diff --git a/tests/test_general.py b/tests/test_general.py
+index a923ad19..b207a73b 100644
+--- a/tests/test_general.py
++++ b/tests/test_general.py
+@@ -63,7 +63,7 @@ def test_iswrapped():
+     assert page.is_wrapped
+     wt = pymupdf.TOOLS.mupdf_warnings()
+     if pymupdf.mupdf_version_tuple >= (1, 26, 0):
+-        assert wt == 'bogus font ascent/descent values (0 / 0)'
++        assert 'bogus font ascent/descent values (0 / 0)' in wt
+     else:
+         assert not wt
+ 
+@@ -82,7 +82,7 @@ def test_wrapcontents():
+     if rebased:
+         wt = pymupdf.TOOLS.mupdf_warnings()
+         if pymupdf.mupdf_version_tuple >= (1, 26, 0):
+-            assert wt == 'bogus font ascent/descent values (0 / 0)\nPDF stream Length incorrect'
++            assert 'bogus font ascent/descent values (0 / 0)' in wt and '\nPDF stream Length incorrect' in wt
+         else:
+             assert wt == 'PDF stream Length incorrect'
+ 
+@@ -247,7 +247,7 @@ def test_get_text_dict():
+     json.dumps( blocks, indent=4)
+     wt = pymupdf.TOOLS.mupdf_warnings()
+     if pymupdf.mupdf_version_tuple >= (1, 26, 0):
+-        assert wt == 'bogus font ascent/descent values (0 / 0)'
++        assert 'bogus font ascent/descent values (0 / 0)' in wt
+     else:
+         assert not wt
+ 
+diff --git a/tests/test_pixmap.py b/tests/test_pixmap.py
+index 08556363..be993c5e 100644
+--- a/tests/test_pixmap.py
++++ b/tests/test_pixmap.py
+@@ -201,7 +201,7 @@ def test_3050():
+             assert rms == 0
+         wt = pymupdf.TOOLS.mupdf_warnings()
+         if pymupdf.mupdf_version_tuple >= (1, 26, 0):
+-            assert wt == 'bogus font ascent/descent values (0 / 0)\nPDF stream Length incorrect'
++            assert 'bogus font ascent/descent values (0 / 0)' in wt and '\nPDF stream Length incorrect' in wt
+         else:
+             assert wt == 'PDF stream Length incorrect'
+ 
+@@ -521,7 +521,7 @@ def test_4435():
+         pixmap = page.get_pixmap(alpha=False, dpi=120)
+         print(f'Called page.get_pixmap().', flush=1)
+     wt = pymupdf.TOOLS.mupdf_warnings()
+-    assert wt == 'bogus font ascent/descent values (0 / 0)\n... repeated 9 times...'
++    assert 'bogus font ascent/descent values (0 / 0)' in wt
+ 
+ 
+ def test_4423():
+diff --git a/tests/test_tables.py b/tests/test_tables.py
+index 4fb959f4..284ba3cc 100644
+--- a/tests/test_tables.py
++++ b/tests/test_tables.py
+@@ -183,8 +183,7 @@ def test_2979():
+     wt = pymupdf.TOOLS.mupdf_warnings()
+     if pymupdf.mupdf_version_tuple >= (1, 26, 0):
+         assert (
+-            wt
+-            == "bogus font ascent/descent values (3117 / -2463)\n... repeated 2 times..."
++            "bogus font ascent/descent values" in wt
+         )
+     else:
+         assert not wt
+-- 
+2.50.0.rc1.601.g8791813cf3
+
