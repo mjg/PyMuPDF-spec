@@ -143,10 +143,6 @@ SKIP="$SKIP and not test_htmlbox1"
 %endif
 # spuriously failing tests (several archs)
 SKIP="$SKIP and not test_insert and not test_3087"
-# test is known to fail with legacy series mupdf
-%if %["%copr_projectname" == "mupdf-git-1.25.x"]
-SKIP="$SKIP and not test_4363 and not test_4435 and not test_4479 and not test_4503 and not test_4564"
-%endif
 export PYMUPDF_SYSINSTALL_TEST=1
 %pytest -k "$SKIP"
 
