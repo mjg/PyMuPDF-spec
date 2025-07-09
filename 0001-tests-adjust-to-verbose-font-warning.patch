@@ -1,31 +1,45 @@
-From f64ecc2066e79e0509a68c200514eb7e4ae6476c Mon Sep 17 00:00:00 2001
-Message-ID: <f64ecc2066e79e0509a68c200514eb7e4ae6476c.1749043999.git.mjg@fedoraproject.org>
+From 9daf98483a3745bed76a856256f7836096074fe0 Mon Sep 17 00:00:00 2001
+Message-ID: <9daf98483a3745bed76a856256f7836096074fe0.1752050514.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Wed, 4 Jun 2025 15:30:42 +0200
 Subject: [PATCH] tests: adjust to verbose font warning
 
 ---
- tests/test_font.py    | 2 +-
- tests/test_general.py | 6 +++---
- tests/test_pixmap.py  | 4 ++--
- tests/test_tables.py  | 3 +--
- 4 files changed, 7 insertions(+), 8 deletions(-)
+ tests/test_clip_page.py | 2 +-
+ tests/test_font.py      | 2 +-
+ tests/test_general.py   | 6 +++---
+ tests/test_pixmap.py    | 4 ++--
+ tests/test_tables.py    | 3 +--
+ 5 files changed, 8 insertions(+), 9 deletions(-)
 
+diff --git a/tests/test_clip_page.py b/tests/test_clip_page.py
+index 48e4ac59..40a980b2 100644
+--- a/tests/test_clip_page.py
++++ b/tests/test_clip_page.py
+@@ -18,7 +18,7 @@ def test_clip():
+     page = doc[0]
+     page.clip_to_rect(rect)  # clip the page to the rectangle
+     # capture font warning message of MuPDF
+-    assert pymupdf.TOOLS.mupdf_warnings() == "bogus font ascent/descent values (0 / 0)"
++    assert "bogus font ascent/descent values (0 / 0)" in pymupdf.TOOLS.mupdf_warnings()
+     # extract all text characters and assert that each one
+     # has a non-empty intersection with the rectangle.
+     chars = [
 diff --git a/tests/test_font.py b/tests/test_font.py
-index 4cc85775..e252ceb8 100644
+index d9f38f5d..5f4468d8 100644
 --- a/tests/test_font.py
 +++ b/tests/test_font.py
-@@ -318,4 +318,4 @@ def test_4457():
+@@ -326,4 +326,4 @@ def test_4457():
      # Avoid test failure caused by mupdf warnings.
      wt = pymupdf.TOOLS.mupdf_warnings()
      print(f'{wt=}')
 -    assert wt == 'bogus font ascent/descent values (0 / 0)\n... repeated 5 times...'
 +    assert 'bogus font ascent/descent values (0 / 0)' in wt
 diff --git a/tests/test_general.py b/tests/test_general.py
-index a923ad19..b207a73b 100644
+index 1288c227..bbbe4b53 100644
 --- a/tests/test_general.py
 +++ b/tests/test_general.py
-@@ -63,7 +63,7 @@ def test_iswrapped():
+@@ -64,7 +64,7 @@ def test_iswrapped():
      assert page.is_wrapped
      wt = pymupdf.TOOLS.mupdf_warnings()
      if pymupdf.mupdf_version_tuple >= (1, 26, 0):
@@ -34,7 +48,7 @@ index a923ad19..b207a73b 100644
      else:
          assert not wt
  
-@@ -82,7 +82,7 @@ def test_wrapcontents():
+@@ -83,7 +83,7 @@ def test_wrapcontents():
      if rebased:
          wt = pymupdf.TOOLS.mupdf_warnings()
          if pymupdf.mupdf_version_tuple >= (1, 26, 0):
@@ -43,7 +57,7 @@ index a923ad19..b207a73b 100644
          else:
              assert wt == 'PDF stream Length incorrect'
  
-@@ -247,7 +247,7 @@ def test_get_text_dict():
+@@ -248,7 +248,7 @@ def test_get_text_dict():
      json.dumps( blocks, indent=4)
      wt = pymupdf.TOOLS.mupdf_warnings()
      if pymupdf.mupdf_version_tuple >= (1, 26, 0):
@@ -75,10 +89,10 @@ index 08556363..be993c5e 100644
  
  def test_4423():
 diff --git a/tests/test_tables.py b/tests/test_tables.py
-index 4fb959f4..284ba3cc 100644
+index 3ad46d15..279eb1d6 100644
 --- a/tests/test_tables.py
 +++ b/tests/test_tables.py
-@@ -183,8 +183,7 @@ def test_2979():
+@@ -185,8 +185,7 @@ def test_2979():
      wt = pymupdf.TOOLS.mupdf_warnings()
      if pymupdf.mupdf_version_tuple >= (1, 26, 0):
          assert (
@@ -89,5 +103,5 @@ index 4fb959f4..284ba3cc 100644
      else:
          assert not wt
 -- 
-2.50.0.rc1.601.g8791813cf3
+2.50.0.254.g9ffadde533
 
