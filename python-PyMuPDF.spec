@@ -143,6 +143,11 @@ SKIP="$SKIP and not test_htmlbox1"
 %endif
 # spuriously failing tests (several archs)
 SKIP="$SKIP and not test_insert and not test_3087"
+# tests are known to fail with mupdf 1.27.x (reported)
+%if %["%copr_projectname" == "mupdf-git"]
+sed -i -e '/^def test_layout/i @pytest.mark.xfail(reason="mupdf 1.27.x", strict=True)' tests/test_nonpdf.py
+sed -i -e '/^def test_pageids/i @pytest.mark.xfail(reason="mupdf 1.27.x", strict=True)' tests/test_nonpdf.py
+%endif
 export PYMUPDF_SYSINSTALL_TEST=1
 %pytest -k "$SKIP"
 
