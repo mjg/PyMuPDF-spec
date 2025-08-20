@@ -130,7 +130,9 @@ SKIP="$SKIP and not test_spikes"
 # these compare renderings with system fonts or missing fonts
 SKIP="$SKIP and not test_1645 and not test_4180"
 # test downloads data from the internet
-SKIP="$SKIP and not test_4445 and not test_4457"
+SKIP="$SKIP and not test_4445 and not test_4457 and not test_4533"
+# Fedora's swig returns different results
+SKIP="$SKIP and not test_4392"
 %if %{without barcode}
 # we build mupdf without barcode support
 SKIP="$SKIP and not test_barcode"
