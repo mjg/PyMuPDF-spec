@@ -81,6 +81,8 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %autosetup -n %{pypi_name} -p 1
 # disable google analytics for installed doc
 sed -i -e "s/,'sphinxcontrib.googleanalytics'//" docs/conf.py
+# swig < 4.3 (RHEL 9, Fedora 41) needs this
+sed -i -e 's/{swig} --version/{swig} -version/' setup.py
 
 %generate_buildrequires
 %pyproject_buildrequires -R
