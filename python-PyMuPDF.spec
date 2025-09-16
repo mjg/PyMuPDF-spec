@@ -130,7 +130,7 @@ SKIP="$SKIP and not test_fit_springer"
 # test_spikes uses a binary diff on rendered images
 SKIP="$SKIP and not test_spikes"
 # these compare renderings with system fonts or missing fonts
-SKIP="$SKIP and not test_1645 and not test_4180"
+SKIP="$SKIP and not test_1645 and not test_4180 and not test_4613 and not test_htmlbox1"
 # test downloads data from the internet
 SKIP="$SKIP and not test_4445 and not test_4457 and not test_4533"
 # Fedora's swig returns different results
