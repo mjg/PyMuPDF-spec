@@ -1,5 +1,5 @@
-From fa010b7789546f5afa059a90c2565aa8684b73e1 Mon Sep 17 00:00:00 2001
-Message-ID: <fa010b7789546f5afa059a90c2565aa8684b73e1.1752592929.git.mjg@fedoraproject.org>
+From 62f4cf061360d976bf78a4f5febe1861a8c1499d Mon Sep 17 00:00:00 2001
+Message-ID: <62f4cf061360d976bf78a4f5febe1861a8c1499d.1758550988.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Tue, 15 Jul 2025 17:21:56 +0200
 Subject: [PATCH] adjust tests to tesseract 5.5.1
@@ -9,10 +9,10 @@ Subject: [PATCH] adjust tests to tesseract 5.5.1
  1 file changed, 4 insertions(+)
 
 diff --git a/tests/test_tesseract.py b/tests/test_tesseract.py
-index c3c9f728..22e0a733 100644
+index 7650e838..32c1fbd1 100644
 --- a/tests/test_tesseract.py
 +++ b/tests/test_tesseract.py
-@@ -80,6 +80,8 @@ def test_3842b():
+@@ -88,6 +88,8 @@ def test_3842b():
              print(f'test_3842b(): received exception: {e}')
              if 'No tessdata specified and Tesseract is not installed' in str(e):
                  pass
@@ -21,7 +21,7 @@ index c3c9f728..22e0a733 100644
              else:
                  if pymupdf.mupdf_version_tuple < (1, 25, 4):
                      assert 'OCR initialisation failed' in str(e)
-@@ -100,6 +102,8 @@ def test_3842():
+@@ -112,6 +114,8 @@ def test_3842():
              print(f'test_3842(): received exception: {e}', flush=1)
              if 'No tessdata specified and Tesseract is not installed' in str(e):
                  pass
@@ -31,5 +31,5 @@ index c3c9f728..22e0a733 100644
                  pass
              else:
 -- 
-2.50.1.385.ge2f13731a7
+2.51.0.544.g305ed5581e
 

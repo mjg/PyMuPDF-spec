@@ -1,5 +1,5 @@
-From 9daf98483a3745bed76a856256f7836096074fe0 Mon Sep 17 00:00:00 2001
-Message-ID: <9daf98483a3745bed76a856256f7836096074fe0.1752050514.git.mjg@fedoraproject.org>
+From 07fce16d3445688c0d2188cfe0af8e07bf233c48 Mon Sep 17 00:00:00 2001
+Message-ID: <07fce16d3445688c0d2188cfe0af8e07bf233c48.1758550985.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Wed, 4 Jun 2025 15:30:42 +0200
 Subject: [PATCH] tests: adjust to verbose font warning
@@ -26,17 +26,17 @@ index 48e4ac59..40a980b2 100644
      # has a non-empty intersection with the rectangle.
      chars = [
 diff --git a/tests/test_font.py b/tests/test_font.py
-index d9f38f5d..5f4468d8 100644
+index 0aa31a8c..b46e5dca 100644
 --- a/tests/test_font.py
 +++ b/tests/test_font.py
-@@ -326,4 +326,4 @@ def test_4457():
+@@ -337,4 +337,4 @@ def test_4457():
      # Avoid test failure caused by mupdf warnings.
      wt = pymupdf.TOOLS.mupdf_warnings()
      print(f'{wt=}')
 -    assert wt == 'bogus font ascent/descent values (0 / 0)\n... repeated 5 times...'
 +    assert 'bogus font ascent/descent values (0 / 0)' in wt
 diff --git a/tests/test_general.py b/tests/test_general.py
-index 1288c227..bbbe4b53 100644
+index 5d6767ce..66a50332 100644
 --- a/tests/test_general.py
 +++ b/tests/test_general.py
 @@ -64,7 +64,7 @@ def test_iswrapped():
@@ -67,7 +67,7 @@ index 1288c227..bbbe4b53 100644
          assert not wt
  
 diff --git a/tests/test_pixmap.py b/tests/test_pixmap.py
-index 08556363..be993c5e 100644
+index b2aa6927..882b6eff 100644
 --- a/tests/test_pixmap.py
 +++ b/tests/test_pixmap.py
 @@ -201,7 +201,7 @@ def test_3050():
@@ -79,7 +79,7 @@ index 08556363..be993c5e 100644
          else:
              assert wt == 'PDF stream Length incorrect'
  
-@@ -521,7 +521,7 @@ def test_4435():
+@@ -524,7 +524,7 @@ def test_4435():
          pixmap = page.get_pixmap(alpha=False, dpi=120)
          print(f'Called page.get_pixmap().', flush=1)
      wt = pymupdf.TOOLS.mupdf_warnings()
@@ -89,10 +89,10 @@ index 08556363..be993c5e 100644
  
  def test_4423():
 diff --git a/tests/test_tables.py b/tests/test_tables.py
-index 3ad46d15..279eb1d6 100644
+index 2c537de5..936dbea5 100644
 --- a/tests/test_tables.py
 +++ b/tests/test_tables.py
-@@ -185,8 +185,7 @@ def test_2979():
+@@ -186,8 +186,7 @@ def test_2979():
      wt = pymupdf.TOOLS.mupdf_warnings()
      if pymupdf.mupdf_version_tuple >= (1, 26, 0):
          assert (
@@ -103,5 +103,5 @@ index 3ad46d15..279eb1d6 100644
      else:
          assert not wt
 -- 
-2.50.0.254.g9ffadde533
+2.51.0.544.g305ed5581e
 
