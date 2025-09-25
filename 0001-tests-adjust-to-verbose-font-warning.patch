@@ -1,5 +1,5 @@
-From 07fce16d3445688c0d2188cfe0af8e07bf233c48 Mon Sep 17 00:00:00 2001
-Message-ID: <07fce16d3445688c0d2188cfe0af8e07bf233c48.1758550985.git.mjg@fedoraproject.org>
+From 49db9aa0c864c4da27bd74c9bfad3f1c550ddf28 Mon Sep 17 00:00:00 2001
+Message-ID: <49db9aa0c864c4da27bd74c9bfad3f1c550ddf28.1758820146.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Wed, 4 Jun 2025 15:30:42 +0200
 Subject: [PATCH] tests: adjust to verbose font warning
@@ -9,8 +9,8 @@ Subject: [PATCH] tests: adjust to verbose font warning
  tests/test_font.py      | 2 +-
  tests/test_general.py   | 6 +++---
  tests/test_pixmap.py    | 4 ++--
- tests/test_tables.py    | 3 +--
- 5 files changed, 8 insertions(+), 9 deletions(-)
+ tests/test_tables.py    | 6 ++----
+ 5 files changed, 9 insertions(+), 11 deletions(-)
 
 diff --git a/tests/test_clip_page.py b/tests/test_clip_page.py
 index 48e4ac59..40a980b2 100644
@@ -36,7 +36,7 @@ index 0aa31a8c..b46e5dca 100644
 -    assert wt == 'bogus font ascent/descent values (0 / 0)\n... repeated 5 times...'
 +    assert 'bogus font ascent/descent values (0 / 0)' in wt
 diff --git a/tests/test_general.py b/tests/test_general.py
-index 5d6767ce..66a50332 100644
+index f55124ad..ddfd35ce 100644
 --- a/tests/test_general.py
 +++ b/tests/test_general.py
 @@ -64,7 +64,7 @@ def test_iswrapped():
@@ -89,12 +89,18 @@ index b2aa6927..882b6eff 100644
  
  def test_4423():
 diff --git a/tests/test_tables.py b/tests/test_tables.py
-index 2c537de5..936dbea5 100644
+index d2f4c096..65422de2 100644
 --- a/tests/test_tables.py
 +++ b/tests/test_tables.py
-@@ -186,8 +186,7 @@ def test_2979():
+@@ -186,13 +186,11 @@ def test_2979():
      wt = pymupdf.TOOLS.mupdf_warnings()
-     if pymupdf.mupdf_version_tuple >= (1, 26, 0):
+     if pymupdf.mupdf_version_tuple >= (1, 26, 8):
+         assert (
+-            wt
+-            == "bogus font ascent/descent values (3117 / -2463)\n... repeated 2 times...\nActualtext with no position. Text may be lost or mispositioned.\n... repeated 96 times..."
++            "bogus font ascent/descent values" in wt
+         )
+     elif pymupdf.mupdf_version_tuple >= (1, 26, 0):
          assert (
 -            wt
 -            == "bogus font ascent/descent values (3117 / -2463)\n... repeated 2 times..."

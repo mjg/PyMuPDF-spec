@@ -24,6 +24,7 @@ URL:		https://github.com/pymupdf/PyMuPDF
 # The tree is unmodified (before possibly applying patches).
 Source0:	{{{ GIT_DIRTY=1 git_pack path=source dir_name=PyMuPDF }}}
 
+# Fedora specific patches:
 Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-setup.py-do-not-require-libclang-and-swig.patch
@@ -130,9 +131,9 @@ SKIP="$SKIP and not test_fit_springer"
 # test_spikes uses a binary diff on rendered images
 SKIP="$SKIP and not test_spikes"
 # these compare renderings with system fonts or missing fonts
-SKIP="$SKIP and not test_1645 and not test_4180 and not test_4613 and not test_htmlbox1"
+SKIP="$SKIP and not test_4180 and not test_4613 and not test_htmlbox1"
 # test downloads data from the internet
-SKIP="$SKIP and not test_4445 and not test_4457 and not test_4533"
+SKIP="$SKIP and not test_4445 and not test_4457 and not test_4533 and not test_4702"
 # Fedora's swig returns different results
 SKIP="$SKIP and not test_4392"
 %if %{without barcode}
