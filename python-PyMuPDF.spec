@@ -30,6 +30,7 @@ Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-setup.py-do-not-require-libclang-and-swig.patch
 Patch:		0001-tests-adjust-to-verbose-font-warning.patch
 Patch:		0001-adjust-tests-to-tesseract-5.5.1.patch
+Patch:		0001-tests-conftest-do-not-call-pip.patch
 
 # test dependencies not picked up by generator
 BuildRequires:	python3dist(pillow)
@@ -82,8 +83,6 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %autosetup -n %{pypi_name} -p 1
 # disable google analytics for installed doc
 sed -i -e "s/,'sphinxcontrib.googleanalytics'//" docs/conf.py
-# swig < 4.3 (RHEL 9, Fedora 41) needs this
-sed -i -e 's/{swig} --version/{swig} -version/' setup.py
 
 %generate_buildrequires
 %pyproject_buildrequires -R
