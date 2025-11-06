@@ -1,5 +1,5 @@
-From e8c11775e10a2e19734f671e3d2eee6a3eaf57b7 Mon Sep 17 00:00:00 2001
-Message-ID: <e8c11775e10a2e19734f671e3d2eee6a3eaf57b7.1762032769.git.mjg@fedoraproject.org>
+From de7c6036bd66d9f9d5fbb39dadc7577b000fd160 Mon Sep 17 00:00:00 2001
+Message-ID: <de7c6036bd66d9f9d5fbb39dadc7577b000fd160.1762459653.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Sat, 1 Nov 2025 22:32:10 +0100
 Subject: [PATCH] tests/conftest: do not call pip
@@ -22,5 +22,5 @@ index 8b9bd31b..472f57b8 100644
  # Need to import pymupdf only after we've installed pymupdf-fonts above,
  # because pymupdf imports pymupdf_fonts, and copes with import failure.
 -- 
-2.51.2.1053.gf016e885ee
+2.52.0.rc0.476.g3d3e2faed3
 

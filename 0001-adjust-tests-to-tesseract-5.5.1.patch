@@ -1,5 +1,5 @@
-From 62f4cf061360d976bf78a4f5febe1861a8c1499d Mon Sep 17 00:00:00 2001
-Message-ID: <62f4cf061360d976bf78a4f5febe1861a8c1499d.1758550988.git.mjg@fedoraproject.org>
+From 8a6dd7f013e036c4c1bfef44e9822345610ac116 Mon Sep 17 00:00:00 2001
+Message-ID: <8a6dd7f013e036c4c1bfef44e9822345610ac116.1762459650.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Tue, 15 Jul 2025 17:21:56 +0200
 Subject: [PATCH] adjust tests to tesseract 5.5.1
@@ -31,5 +31,5 @@ index 7650e838..32c1fbd1 100644
                  pass
              else:
 -- 
-2.51.0.544.g305ed5581e
+2.52.0.rc0.476.g3d3e2faed3
 

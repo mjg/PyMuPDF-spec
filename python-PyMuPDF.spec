@@ -15,7 +15,7 @@
 
 Name:		python-%{pypi_name}
 Version:	%{gitdescribefedversion}
-Release:	2%{?dist}
+Release:	1%{?dist}
 Summary:	Python binding for MuPDF - a lightweight PDF and XPS viewer
 
 License:	AGPL-3.0-or-later

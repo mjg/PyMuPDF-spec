@@ -1,5 +1,5 @@
-From 5bc7617de50fa11ade0892b936aab43baab1591a Mon Sep 17 00:00:00 2001
-Message-ID: <5bc7617de50fa11ade0892b936aab43baab1591a.1762284038.git.mjg@fedoraproject.org>
+From b8ab0a38a58b935334609e20597cbe859a0ad22e Mon Sep 17 00:00:00 2001
+Message-ID: <b8ab0a38a58b935334609e20597cbe859a0ad22e.1762459634.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Thu, 31 Oct 2024 23:53:31 +0100
 Subject: [PATCH] setup.py: do not require libclang and swig
@@ -33,5 +33,5 @@ index 676f0e1d..c48941cf 100755
  
  if PYMUPDF_SETUP_URL_WHEEL:
 -- 
-2.52.0.rc0.433.g419cf11bcd
+2.52.0.rc0.476.g3d3e2faed3
 
