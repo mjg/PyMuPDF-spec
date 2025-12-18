@@ -1,5 +1,5 @@
-From e55a2a7b0ce3ee5a6988356ff1ddcea35986df23 Mon Sep 17 00:00:00 2001
-Message-ID: <e55a2a7b0ce3ee5a6988356ff1ddcea35986df23.1762609255.git.mjg@fedoraproject.org>
+From 5f26ae0b859655344ac6b31df73eb469ce039809 Mon Sep 17 00:00:00 2001
+Message-ID: <5f26ae0b859655344ac6b31df73eb469ce039809.1766086224.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Wed, 4 Jun 2025 15:30:42 +0200
 Subject: [PATCH] tests: adjust to verbose font warning
@@ -9,8 +9,8 @@ Subject: [PATCH] tests: adjust to verbose font warning
  tests/test_font.py      | 2 +-
  tests/test_general.py   | 6 +++---
  tests/test_pixmap.py    | 4 ++--
- tests/test_tables.py    | 6 ++----
- 5 files changed, 9 insertions(+), 11 deletions(-)
+ tests/test_tables.py    | 3 +--
+ 5 files changed, 8 insertions(+), 9 deletions(-)
 
 diff --git a/tests/test_clip_page.py b/tests/test_clip_page.py
 index 170418a9..36778ee0 100644
@@ -36,10 +36,10 @@ index 834db349..f4c651ba 100644
 -        assert wt == 'bogus font ascent/descent values (0 / 0)\n... repeated 5 times...'
 +        assert 'bogus font ascent/descent values (0 / 0)' in wt
 diff --git a/tests/test_general.py b/tests/test_general.py
-index 656fbfe5..b0a8d645 100644
+index ef493049..3d033023 100644
 --- a/tests/test_general.py
 +++ b/tests/test_general.py
-@@ -63,7 +63,7 @@ def test_iswrapped():
+@@ -73,7 +73,7 @@ def test_iswrapped():
      page = doc[0]
      assert page.is_wrapped
      if (1, 26, 0) <= pymupdf.mupdf_version_tuple < (1, 27):
@@ -48,7 +48,7 @@ index 656fbfe5..b0a8d645 100644
  
  
  def test_wrapcontents():
-@@ -80,7 +80,7 @@ def test_wrapcontents():
+@@ -90,7 +90,7 @@ def test_wrapcontents():
      if rebased:
          wt = pymupdf.TOOLS.mupdf_warnings()
          if (1, 26, 0) <= pymupdf.mupdf_version_tuple < (1, 27):
@@ -57,7 +57,7 @@ index 656fbfe5..b0a8d645 100644
          else:
              assert wt == 'PDF stream Length incorrect'
  
-@@ -244,7 +244,7 @@ def test_get_text_dict():
+@@ -254,7 +254,7 @@ def test_get_text_dict():
      # Check no opaque types in `blocks`.
      json.dumps( blocks, indent=4)
      if (1, 26, 0) <= pymupdf.mupdf_version_tuple < (1, 27):
@@ -67,7 +67,7 @@ index 656fbfe5..b0a8d645 100644
  def test_font():
      font = pymupdf.Font(ordering=0)
 diff --git a/tests/test_pixmap.py b/tests/test_pixmap.py
-index 5db6f597..abde39f3 100644
+index 122d2779..2ef48334 100644
 --- a/tests/test_pixmap.py
 +++ b/tests/test_pixmap.py
 @@ -202,7 +202,7 @@ def test_3050():
@@ -89,18 +89,12 @@ index 5db6f597..abde39f3 100644
  
  def test_4423():
 diff --git a/tests/test_tables.py b/tests/test_tables.py
-index d2f4c096..65422de2 100644
+index 2c537de5..936dbea5 100644
 --- a/tests/test_tables.py
 +++ b/tests/test_tables.py
-@@ -186,13 +186,11 @@ def test_2979():
+@@ -186,8 +186,7 @@ def test_2979():
      wt = pymupdf.TOOLS.mupdf_warnings()
-     if pymupdf.mupdf_version_tuple >= (1, 26, 8):
-         assert (
--            wt
--            == "bogus font ascent/descent values (3117 / -2463)\n... repeated 2 times...\nActualtext with no position. Text may be lost or mispositioned.\n... repeated 96 times..."
-+            "bogus font ascent/descent values" in wt
-         )
-     elif pymupdf.mupdf_version_tuple >= (1, 26, 0):
+     if pymupdf.mupdf_version_tuple >= (1, 26, 0):
          assert (
 -            wt
 -            == "bogus font ascent/descent values (3117 / -2463)\n... repeated 2 times..."
@@ -109,5 +103,5 @@ index d2f4c096..65422de2 100644
      else:
          assert not wt
 -- 
-2.52.0.rc1.465.g69db7b436a
+2.52.0.393.g7a3d0a1bab
 
