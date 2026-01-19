@@ -1,0 +1,27 @@
+From d44f143262c7ddec4f11b8f16221aeef3bcec8cf Mon Sep 17 00:00:00 2001
+Message-ID: <d44f143262c7ddec4f11b8f16221aeef3bcec8cf.1768831384.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Mon, 19 Jan 2026 15:02:15 +0100
+Subject: [PATCH] test_typing: do not `pip install mypy`
+
+We provide `mypy` via build requirements, as it should be.
+---
+ tests/test_typing.py | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/tests/test_typing.py b/tests/test_typing.py
+index f8f907c8..7add1a5f 100644
+--- a/tests/test_typing.py
++++ b/tests/test_typing.py
+@@ -20,8 +20,6 @@ def test_py_typed():
+         return
+         
+     print(f'test_py_typed(): {pymupdf.__path__=}')
+-    run('pip uninstall -y mypy')
+-    run('pip install mypy')
+     root = os.path.abspath(f'{__file__}/../..')
+     
+     # Run mypy on this .py file; it will fail at `import pymypdf` if the
+-- 
+2.53.0.rc0.260.gc075226e72
+
