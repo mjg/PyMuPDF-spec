@@ -31,7 +31,6 @@ Patch:		0001-setup.py-do-not-require-libclang-and-swig.patch
 Patch:		0001-tests-adjust-to-verbose-font-warning.patch
 Patch:		0001-adjust-tests-to-tesseract-5.5.1.patch
 Patch:		0001-tests-conftest-do-not-call-pip.patch
-Patch:		0001-test_typing-do-not-pip-install-mypy.patch
 
 # test dependencies not picked up by generator
 BuildRequires:	python3dist(pillow)

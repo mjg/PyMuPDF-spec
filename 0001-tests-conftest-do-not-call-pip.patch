@@ -1,5 +1,5 @@
-From de7c6036bd66d9f9d5fbb39dadc7577b000fd160 Mon Sep 17 00:00:00 2001
-Message-ID: <de7c6036bd66d9f9d5fbb39dadc7577b000fd160.1762459653.git.mjg@fedoraproject.org>
+From 532391c6d31080dc5b7b8af81eb89e3885ceacea Mon Sep 17 00:00:00 2001
+Message-ID: <532391c6d31080dc5b7b8af81eb89e3885ceacea.1769800794.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Sat, 1 Nov 2025 22:32:10 +0100
 Subject: [PATCH] tests/conftest: do not call pip
@@ -10,10 +10,10 @@ Oh well ...
  1 file changed, 1 deletion(-)
 
 diff --git a/tests/conftest.py b/tests/conftest.py
-index 8b9bd31b..472f57b8 100644
+index 44c5e4d0..371038eb 100644
 --- a/tests/conftest.py
 +++ b/tests/conftest.py
-@@ -29,7 +29,6 @@ def install_required_packages():
+@@ -36,7 +36,6 @@ def install_required_packages():
      print(f'{__file__}:install_required_packages)(): Running: {command}', flush=1)
      subprocess.run(command, shell=1, check=1)
  
@@ -22,5 +22,5 @@ index 8b9bd31b..472f57b8 100644
  # Need to import pymupdf only after we've installed pymupdf-fonts above,
  # because pymupdf imports pymupdf_fonts, and copes with import failure.
 -- 
-2.52.0.rc0.476.g3d3e2faed3
+2.53.0.rc1.285.g12662c75d7
 

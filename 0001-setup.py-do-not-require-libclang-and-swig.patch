@@ -1,5 +1,5 @@
-From b8ab0a38a58b935334609e20597cbe859a0ad22e Mon Sep 17 00:00:00 2001
-Message-ID: <b8ab0a38a58b935334609e20597cbe859a0ad22e.1762459634.git.mjg@fedoraproject.org>
+From c2977823e6d95a637dc9238e05a9c6c0eddf6239 Mon Sep 17 00:00:00 2001
+Message-ID: <c2977823e6d95a637dc9238e05a9c6c0eddf6239.1769800825.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Thu, 31 Oct 2024 23:53:31 +0100
 Subject: [PATCH] setup.py: do not require libclang and swig
@@ -11,10 +11,10 @@ on Fedora), so do not add them to the requirements by default.
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/setup.py b/setup.py
-index 676f0e1d..c48941cf 100755
+index 7b05f669..03defd91 100755
 --- a/setup.py
 +++ b/setup.py
-@@ -1405,7 +1405,7 @@ else:
+@@ -1410,7 +1410,7 @@ else:
              # There are still of problems when building on old macos.
              ret.append('libclang==14.0.6')
          else:
@@ -23,7 +23,7 @@ index 676f0e1d..c48941cf 100755
          if msys2:
              print(f'msys2: pip install of swig does not build; assuming `pacman -S swig`.')
          elif openbsd:
-@@ -1417,7 +1417,7 @@ else:
+@@ -1423,7 +1423,7 @@ else:
              ret.append('swig==4.3.1')
          else:
              ret.append('swig')
@@ -33,5 +33,5 @@ index 676f0e1d..c48941cf 100755
  
  if PYMUPDF_SETUP_URL_WHEEL:
 -- 
-2.52.0.rc0.476.g3d3e2faed3
+2.53.0.rc1.285.g12662c75d7
 

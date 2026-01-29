@@ -1,5 +1,5 @@
-From c55d4ff54efa6de19c17f558522a9d0b10ff3d06 Mon Sep 17 00:00:00 2001
-Message-ID: <c55d4ff54efa6de19c17f558522a9d0b10ff3d06.1762459629.git.mjg@fedoraproject.org>
+From 41f1b681dc4411a5a547697804b5f44d7d5be18f Mon Sep 17 00:00:00 2001
+Message-ID: <41f1b681dc4411a5a547697804b5f44d7d5be18f.1769800835.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Sat, 15 Apr 2023 17:53:27 +0200
 Subject: [PATCH] fix test_*font
@@ -13,10 +13,10 @@ Adjust the tests to use the fallback font instead.
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/tests/test_general.py b/tests/test_general.py
-index 0b284e7e..656fbfe5 100644
+index 05f6db8c..833b77d5 100644
 --- a/tests/test_general.py
 +++ b/tests/test_general.py
-@@ -180,9 +180,9 @@ def test_bug1971():
+@@ -188,9 +188,9 @@ def test_bug1971():
          assert doc.is_closed
  
  def test_default_font():
@@ -29,7 +29,7 @@ index 0b284e7e..656fbfe5 100644
  
  def test_add_ink_annot():
      import math
-@@ -247,7 +247,7 @@ def test_get_text_dict():
+@@ -255,7 +255,7 @@ def test_get_text_dict():
          assert pymupdf.TOOLS.mupdf_warnings() == 'bogus font ascent/descent values (0 / 0)'
  
  def test_font():
@@ -39,5 +39,5 @@ index 0b284e7e..656fbfe5 100644
      bbox = font.glyph_bbox( 65)
      print( f'bbox={bbox!r}')
 -- 
-2.52.0.rc0.476.g3d3e2faed3
+2.53.0.rc1.285.g12662c75d7
 
