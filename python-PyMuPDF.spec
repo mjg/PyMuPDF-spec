@@ -136,6 +136,8 @@ SKIP="$SKIP and not test_spikes"
 SKIP="$SKIP and not test_4180 and not test_4613 and not test_htmlbox1"
 # test downloads data from the internet
 SKIP="$SKIP and not test_4445 and not test_4457 and not test_4533 and not test_4702"
+# test requires additional packages
+SKIP="$SKIP and not test_4751"
 # Fedora's swig returns different results
 SKIP="$SKIP and not test_4392"
 %if %{without barcode}
