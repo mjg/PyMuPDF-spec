@@ -152,6 +152,10 @@ SKIP="$SKIP and not test_htmlbox1"
 %endif
 # spuriously failing tests (several archs)
 SKIP="$SKIP and not test_insert and not test_3087"
+# tests apply to >= 1.27.x only
+%if %["%copr_projectname" == "mupdf-git-1.26.x"]
+SKIP="$SKIP and not test_4599 and not test_4790"
+%endif
 # tests are known to fail with mupdf 1.27.x (reported)
 %if %[ %["%copr_projectname" == "mupdf-git"] || %["%copr_projectname" == "mupdf-git-1.27.x"] ]
 sed -i -e '/^import pymupdf/i import pytest' tests/test_nonpdf.py
