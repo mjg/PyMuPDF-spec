@@ -10,8 +10,8 @@
 
 %bcond docs %{defined fedora}
 
-# mupdf barcode support is available on Fedora copr git build only
-%bcond barcode %[ %{defined fedora} && %["%copr_projectname" == "mupdf-git"] ] 
+# mupdf barcode support is available on Fedora only
+%bcond barcode 0%{?fedora} 
 
 Name:		python-%{pypi_name}
 Version:	%{gitdescribefedversion}
