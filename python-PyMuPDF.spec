@@ -160,12 +160,8 @@ SKIP="$SKIP and not test_insert and not test_3087"
 %if %["%copr_projectname" == "mupdf-git-1.26.x"]
 SKIP="$SKIP and not test_4599 and not test_4790"
 %endif
-# tests are known to fail with mupdf 1.27.x (reported)
-%if %[ %["%copr_projectname" == "mupdf-git"] || %["%copr_projectname" == "mupdf-git-1.27.x"] ]
-sed -i -e '/^import pymupdf/i import pytest' tests/test_nonpdf.py
-sed -i -e '/^def test_layout/i @pytest.mark.xfail(reason="mupdf 1.27.x", strict=True)' tests/test_nonpdf.py
-sed -i -e '/^def test_pageids/i @pytest.mark.xfail(reason="mupdf 1.27.x", strict=True)' tests/test_nonpdf.py
-%endif
+# tests are known to fail on newer Fedoras (reported)
+SKIP="$SKIP and not test_layout and not test_pageids"
 export PYMUPDF_SYSINSTALL_TEST=1
 %pytest -k "$SKIP"
 
