@@ -1,5 +1,5 @@
-From 39eb692c66af0a24f59baa65c89f1d342040a45b Mon Sep 17 00:00:00 2001
-Message-ID: <39eb692c66af0a24f59baa65c89f1d342040a45b.1769800819.git.mjg@fedoraproject.org>
+From 66379848dacbc3ce9a937c05baf3ff807b295165 Mon Sep 17 00:00:00 2001
+Message-ID: <66379848dacbc3ce9a937c05baf3ff807b295165.1770997606.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Wed, 4 Jun 2025 15:30:42 +0200
 Subject: [PATCH] tests: adjust to verbose font warning
@@ -67,7 +67,7 @@ index 833b77d5..d30c647a 100644
  def test_font():
      font = pymupdf.Font(ordering=0)
 diff --git a/tests/test_pixmap.py b/tests/test_pixmap.py
-index d48589fa..040f32d4 100644
+index 1e68b2cc..00c1bf97 100644
 --- a/tests/test_pixmap.py
 +++ b/tests/test_pixmap.py
 @@ -198,7 +198,7 @@ def test_3050():
@@ -79,7 +79,7 @@ index d48589fa..040f32d4 100644
          else:
              assert wt == 'PDF stream Length incorrect'
  
-@@ -526,7 +526,7 @@ def test_4435():
+@@ -532,7 +532,7 @@ def test_4435():
              pixmap = page.get_pixmap(alpha=False, dpi=120)
          print(f'Called page.get_pixmap().', flush=1)
      if pymupdf.mupdf_version_tuple < (1, 27):
@@ -89,19 +89,19 @@ index d48589fa..040f32d4 100644
  
  def test_4423():
 diff --git a/tests/test_tables.py b/tests/test_tables.py
-index 9e4fdb86..700bc0b3 100644
+index d5fa5ef7..308035c5 100644
 --- a/tests/test_tables.py
 +++ b/tests/test_tables.py
-@@ -185,8 +185,7 @@ def test_2979():
- 
-     wt = pymupdf.TOOLS.mupdf_warnings()
-     assert (
--        wt
--        == "bogus font ascent/descent values (3117 / -2463)\n... repeated 2 times..."
-+        "bogus font ascent/descent values" in wt
-     )
+@@ -188,8 +188,7 @@ def test_2979():
+         assert ( wt == '' )
+     else:
+         assert (
+-            wt
+-            == "bogus font ascent/descent values (3117 / -2463)\n... repeated 2 times..."
++            "bogus font ascent/descent values" in wt
+         )
  
  
 -- 
-2.53.0.rc1.285.g12662c75d7
+2.53.0.247.g99c804103f
 
