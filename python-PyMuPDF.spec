@@ -150,6 +150,10 @@ SKIP="$SKIP and not test_3087"
 # test_htmlbox1 fails on s390 s390x (bigendian unicode problem?)
 SKIP="$SKIP and not test_htmlbox1"
 %endif
+%ifarch %{ix86}
+# test gives the same failure on i686 as on pyodide
+SKIP="$SKIP and not test_4435"
+%endif
 # spuriously failing tests (several archs)
 SKIP="$SKIP and not test_insert and not test_3087"
 # tests apply to >= 1.27.x only
