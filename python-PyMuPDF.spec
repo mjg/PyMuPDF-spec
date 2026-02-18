@@ -2,7 +2,7 @@
 # {{{ git submodule update --init --recursive 1>&2; git submodule }}}
 %global gitversion		{{{ git -C source rev-parse HEAD }}}
 %global gitshortversion		{{{ git -C source rev-parse --short HEAD }}}
-%global gitdescribefedversion	{{{ git -C source describe --tags | sed -e 's/^\(.*\)-\([0-9]*\)-g\(.*\)$/\1^\2.g\3/' }}}
+%global gitdescribefedversion	{{{ git -C source describe --tags --match '[0-9]*' | sed -e 's/^\(.*\)-\([0-9]*\)-g\(.*\)$/\1^\2.g\3/' }}}
 
 %global pypi_name PyMuPDF
 %global module_name pymupdf
