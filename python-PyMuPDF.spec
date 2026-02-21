@@ -138,8 +138,11 @@ SKIP="$SKIP and not test_4180 and not test_4613 and not test_htmlbox1"
 SKIP="$SKIP and not test_4445 and not test_4457 and not test_4533 and not test_4702"
 # test requires additional packages
 SKIP="$SKIP and not test_4751"
-# Fedora's swig returns different results
-##SKIP="$SKIP and not test_4392"
+# Fedora's earlier swig may return different results
+%if 0%{?fedora} >= 43 || 0%{?rhel} >= 11
+%else
+SKIP="$SKIP and not test_4392"
+%endif
 %if %{without barcode}
 # we build mupdf without barcode support
 SKIP="$SKIP and not test_barcode"
