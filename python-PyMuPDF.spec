@@ -139,7 +139,7 @@ SKIP="$SKIP and not test_4445 and not test_4457 and not test_4533 and not test_4
 # test requires additional packages
 SKIP="$SKIP and not test_4751"
 # Fedora's earlier swig may return different results
-%if 0%{?fedora} >= 43 || 0%{?rhel} >= 11
+%if 0%{?fedora} >= 44 || 0%{?rhel} >= 11
 %else
 SKIP="$SKIP and not test_4392"
 %endif
