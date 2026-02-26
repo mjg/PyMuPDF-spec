@@ -1,5 +1,5 @@
-From 9cf34085507d483980c924079264ad0b0e6c57e7 Mon Sep 17 00:00:00 2001
-Message-ID: <9cf34085507d483980c924079264ad0b0e6c57e7.1770997612.git.mjg@fedoraproject.org>
+From bfe6ec95145551ca9e4d1f2dfb97cf498286bbae Mon Sep 17 00:00:00 2001
+Message-ID: <bfe6ec95145551ca9e4d1f2dfb97cf498286bbae.1772136358.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Sat, 15 Apr 2023 17:53:27 +0200
 Subject: [PATCH] fix test_*font
@@ -13,7 +13,7 @@ Adjust the tests to use the fallback font instead.
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/tests/test_general.py b/tests/test_general.py
-index 05f6db8c..833b77d5 100644
+index 96d070f1..f86ccac7 100644
 --- a/tests/test_general.py
 +++ b/tests/test_general.py
 @@ -188,9 +188,9 @@ def test_bug1971():
@@ -39,5 +39,5 @@ index 05f6db8c..833b77d5 100644
      bbox = font.glyph_bbox( 65)
      print( f'bbox={bbox!r}')
 -- 
-2.53.0.247.g99c804103f
+2.53.0.546.g660574eaac
 
