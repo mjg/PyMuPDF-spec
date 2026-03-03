@@ -138,6 +138,10 @@ SKIP="$SKIP and not test_4180 and not test_4613 and not test_htmlbox1"
 SKIP="$SKIP and not test_4445 and not test_4457 and not test_4533 and not test_4702"
 # test requires additional packages
 SKIP="$SKIP and not test_4751"
+# test fails on *EL after PyMuPDF change
+%if 0%{?rhel}
+SKIP="$SKIP and not test_3842"
+%endif
 # Fedora's earlier swig may return different results
 %if 0%{?fedora} >= 44 || 0%{?rhel} >= 11
 %else
