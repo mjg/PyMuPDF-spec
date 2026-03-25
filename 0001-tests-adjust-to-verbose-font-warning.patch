@@ -1,5 +1,5 @@
-From a61a624e113d4764ac59f5f3bee09a1c4ba46303 Mon Sep 17 00:00:00 2001
-Message-ID: <a61a624e113d4764ac59f5f3bee09a1c4ba46303.1772136351.git.mjg@fedoraproject.org>
+From b26eca3d1e1eae7bf6ada068639a699946464dd9 Mon Sep 17 00:00:00 2001
+Message-ID: <b26eca3d1e1eae7bf6ada068639a699946464dd9.1774445371.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Wed, 4 Jun 2025 15:30:42 +0200
 Subject: [PATCH] tests: adjust to verbose font warning
@@ -36,7 +36,7 @@ index 1b7fd4a9..3bde1a4e 100644
 -        assert wt == 'bogus font ascent/descent values (0 / 0)\n... repeated 5 times...'
 +        assert 'bogus font ascent/descent values (0 / 0)' in wt
 diff --git a/tests/test_general.py b/tests/test_general.py
-index f86ccac7..52c885a9 100644
+index 42c9ef01..e5ce1ea1 100644
 --- a/tests/test_general.py
 +++ b/tests/test_general.py
 @@ -73,7 +73,7 @@ def test_iswrapped():
@@ -67,10 +67,10 @@ index f86ccac7..52c885a9 100644
  def test_font():
      font = pymupdf.Font(ordering=0)
 diff --git a/tests/test_pixmap.py b/tests/test_pixmap.py
-index ee179b8e..22d9c38c 100644
+index 76a91a5b..23ba1b6a 100644
 --- a/tests/test_pixmap.py
 +++ b/tests/test_pixmap.py
-@@ -199,7 +199,7 @@ def test_3050():
+@@ -200,7 +200,7 @@ def test_3050():
          assert rms == 0
          wt = pymupdf.TOOLS.mupdf_warnings()
          if (1, 26, 0) <= pymupdf.mupdf_version_tuple < (1, 27):
@@ -79,15 +79,15 @@ index ee179b8e..22d9c38c 100644
          else:
              assert wt == 'PDF stream Length incorrect'
  
-@@ -537,7 +537,7 @@ def test_4435():
+@@ -543,7 +543,7 @@ def test_4435():
              pixmap = page.get_pixmap(alpha=False, dpi=120)
          print(f'Called page.get_pixmap().', flush=1)
      if pymupdf.mupdf_version_tuple < (1, 27):
 -        assert pymupdf.TOOLS.mupdf_warnings() == 'bogus font ascent/descent values (0 / 0)\n... repeated 9 times...'
 +        assert 'bogus font ascent/descent values (0 / 0)' in pymupdf.TOOLS.mupdf_warnings()
- 
- 
- def test_4423():
+     elif pymupdf.mupdf_version_tuple >= (1, 28, 0):
+         wt_expected = ('limit error: Overly large image\ncannot render glyph\n' * 42).rstrip()
+         assert pymupdf.TOOLS.mupdf_warnings() == wt_expected
 diff --git a/tests/test_tables.py b/tests/test_tables.py
 index d5fa5ef7..308035c5 100644
 --- a/tests/test_tables.py
@@ -103,5 +103,5 @@ index d5fa5ef7..308035c5 100644
  
  
 -- 
-2.53.0.546.g660574eaac
+2.53.0.1128.ga4b64a73c7
 
