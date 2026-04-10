@@ -8,10 +8,8 @@
 %global module_name pymupdf
 %global module_name_compat fitz
 
-%bcond docs %{defined fedora}
-
-# mupdf barcode support is available on Fedora only
-%bcond barcode 0%{?fedora} 
+%bcond docs 1
+%bcond barcode 1 
 
 Name:		python-%{pypi_name}
 Version:	%{gitdescribefedversion}
@@ -43,8 +41,6 @@ BuildRequires:	python3-sphinx-copybutton
 BuildRequires:	python3-sphinx-notfound-page
 BuildRequires:	python3-furo
 BuildRequires:	rst2pdf
-# work around rst2pdf incompatibility with docutils 0.22
-BuildRequires:	python3-roman
 %endif
 BuildRequires:	gcc gcc-c++
 BuildRequires:	swig
@@ -99,9 +95,6 @@ export PYMUPDF_SETUP_MUPDF_BUILD=''
 export PYMUPDF_SETUP_IMPLEMENTATIONS='b'
 # build breaks on F39/EL9 with limited API, and we depend on py version anyways:
 export PYMUPDF_SETUP_PY_LIMITED_API=0
-%if 0%{?rhel} && 0%{?rhel} <= 9
-%set_build_flags
-%endif
 CFLAGS="$CFLAGS -I/usr/include -I/usr/include/freetype2 -I/usr/include/mupdf"
 LDFLAGS="$LDFLAGS -lfreetype -lmupdf"
 %pyproject_wheel
@@ -138,12 +131,8 @@ SKIP="$SKIP and not test_4180 and not test_4613 and not test_htmlbox1"
 SKIP="$SKIP and not test_4445 and not test_4457 and not test_4533 and not test_4702"
 # test requires additional packages
 SKIP="$SKIP and not test_4751"
-# test fails on *EL after PyMuPDF change
-%if 0%{?rhel}
-SKIP="$SKIP and not test_3842"
-%endif
 # Fedora's earlier swig may return different results
-%if 0%{?fedora} >= 44 || 0%{?rhel} >= 11
+%if 0%{?fedora} >= 44
 %else
 SKIP="$SKIP and not test_4392"
 %endif
