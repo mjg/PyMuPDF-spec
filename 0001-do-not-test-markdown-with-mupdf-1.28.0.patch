@@ -1,0 +1,27 @@
+From be1c9fb2af2a37cc7831e4771348129e03a4d908 Mon Sep 17 00:00:00 2001
+Message-ID: <be1c9fb2af2a37cc7831e4771348129e03a4d908.1782505204.git.mjg@fedoraproject.org>
+From: Michael J Gruber <mjg@fedoraproject.org>
+Date: Fri, 26 Jun 2026 22:19:57 +0200
+Subject: [PATCH] do not test markdown with mupdf < 1.28.0
+
+---
+ tests/test_markdown_support.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/tests/test_markdown_support.py b/tests/test_markdown_support.py
+index a67c688c..9a1c34c0 100644
+--- a/tests/test_markdown_support.py
++++ b/tests/test_markdown_support.py
+@@ -74,6 +74,9 @@ def test_markdown_style():
+             assert "Roman" not in spans[0]["font"]
+ 
+ def test_markdown_save():
++    if pymupdf.mupdf_version_tuple < (1, 28, 0):
++        print("no testing on MuPDF < 1.28.0")
++        return
+     md = textwrap.dedent('''
+             # title
+             
+-- 
+2.55.0.rc2.784.gc71a16c163
+
