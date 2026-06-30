@@ -1,5 +1,5 @@
-From 85192c321adc855606eab63da47dcefdbc3f9f9b Mon Sep 17 00:00:00 2001
-Message-ID: <85192c321adc855606eab63da47dcefdbc3f9f9b.1772136344.git.mjg@fedoraproject.org>
+From ee33463dd65fdf18795ef9d7ca139f52a36ceac6 Mon Sep 17 00:00:00 2001
+Message-ID: <ee33463dd65fdf18795ef9d7ca139f52a36ceac6.1782826316.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Sat, 1 Nov 2025 22:32:10 +0100
 Subject: [PATCH] tests/conftest: do not call pip
@@ -10,10 +10,10 @@ Oh well ...
  1 file changed, 1 deletion(-)
 
 diff --git a/tests/conftest.py b/tests/conftest.py
-index c79e6990..3a4ae7a4 100644
+index 3c268c15..aa993a8d 100644
 --- a/tests/conftest.py
 +++ b/tests/conftest.py
-@@ -36,7 +36,6 @@ def install_required_packages():
+@@ -37,7 +37,6 @@ def install_required_packages():
      print(f'{__file__}:install_required_packages)(): Running: {command}', flush=1)
      subprocess.run(command, shell=1, check=1)
  
@@ -22,5 +22,5 @@ index c79e6990..3a4ae7a4 100644
  
  @pytest.fixture(scope="session", autouse=True)
 -- 
-2.53.0.546.g660574eaac
+2.55.0.rc2.784.gc71a16c163
 

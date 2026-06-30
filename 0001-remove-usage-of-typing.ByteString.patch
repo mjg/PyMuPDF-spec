@@ -1,5 +1,5 @@
-From f5bfa9dc0c80b3715fa8526d81694aa5c54a1fa5 Mon Sep 17 00:00:00 2001
-Message-ID: <f5bfa9dc0c80b3715fa8526d81694aa5c54a1fa5.1780689448.git.mjg@fedoraproject.org>
+From fbad3c423c6e7caf0ece69e2b6638d73621bf919 Mon Sep 17 00:00:00 2001
+Message-ID: <fbad3c423c6e7caf0ece69e2b6638d73621bf919.1782826311.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Fri, 5 Jun 2026 21:55:08 +0200
 Subject: [PATCH] remove usage of typing.ByteString
@@ -8,7 +8,7 @@ typing.ByteString is deprecated in python 3.15 and slated for removal in
 python 3.17. This creates deprecation warnings which trip up our tests.
 
 Since we are requiring python >= 3.10 already, we can switch to the
-proper alterantive unconditionally now.
+proper alternative unconditionally now.
 ---
  src/__init__.py        | 7 +------
  src/utils.py           | 9 ++-------
@@ -17,10 +17,10 @@ proper alterantive unconditionally now.
  4 files changed, 5 insertions(+), 25 deletions(-)
 
 diff --git a/src/__init__.py b/src/__init__.py
-index 8b756ccf..2bff8ec0 100644
+index 7434f7bd..00e79722 100644
 --- a/src/__init__.py
 +++ b/src/__init__.py
-@@ -462,12 +462,7 @@ def _format_g(value, *, fmt='%g'):
+@@ -464,12 +464,7 @@ def _format_g(value, *, fmt='%g'):
          
  format_g = _format_g
  
@@ -91,5 +91,5 @@ index c1369afb..3639834c 100644
  AnyType = typing.Any
  OptInt = typing.Union[int, None]
 -- 
-2.54.0.1146.g083d50a523
+2.55.0.rc2.784.gc71a16c163
 

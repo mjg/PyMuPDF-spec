@@ -1,5 +1,5 @@
-From 735e1b2ebc83223287224ab3df08e2e5acb1d05c Mon Sep 17 00:00:00 2001
-Message-ID: <735e1b2ebc83223287224ab3df08e2e5acb1d05c.1772136348.git.mjg@fedoraproject.org>
+From 8ed449de3d6090822a6979818c2030b6dd0dc998 Mon Sep 17 00:00:00 2001
+Message-ID: <8ed449de3d6090822a6979818c2030b6dd0dc998.1782826318.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Tue, 15 Jul 2025 17:21:56 +0200
 Subject: [PATCH] adjust tests to tesseract 5.5.1
@@ -9,7 +9,7 @@ Subject: [PATCH] adjust tests to tesseract 5.5.1
  1 file changed, 4 insertions(+)
 
 diff --git a/tests/test_tesseract.py b/tests/test_tesseract.py
-index 11c38352..f94557b0 100644
+index 734bdae5..20e5d524 100644
 --- a/tests/test_tesseract.py
 +++ b/tests/test_tesseract.py
 @@ -69,6 +69,8 @@ def test_3842b():
@@ -21,7 +21,7 @@ index 11c38352..f94557b0 100644
              else:
                  assert 'Tesseract language initialisation failed' in str(e)
  
-@@ -87,6 +89,8 @@ def test_3842():
+@@ -92,6 +94,8 @@ def test_3842():
              print(f'test_3842(): received exception: {e}', flush=1)
              if 'No tessdata specified and Tesseract is not installed' in str(e):
                  pass
@@ -31,5 +31,5 @@ index 11c38352..f94557b0 100644
                  pass
              else:
 -- 
-2.53.0.546.g660574eaac
+2.55.0.rc2.784.gc71a16c163
 

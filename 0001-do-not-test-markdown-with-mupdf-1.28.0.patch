@@ -1,5 +1,5 @@
-From be1c9fb2af2a37cc7831e4771348129e03a4d908 Mon Sep 17 00:00:00 2001
-Message-ID: <be1c9fb2af2a37cc7831e4771348129e03a4d908.1782505204.git.mjg@fedoraproject.org>
+From fbfa1d677578fb197cc953dad26264b327e33e99 Mon Sep 17 00:00:00 2001
+Message-ID: <fbfa1d677578fb197cc953dad26264b327e33e99.1782826308.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Fri, 26 Jun 2026 22:19:57 +0200
 Subject: [PATCH] do not test markdown with mupdf < 1.28.0
@@ -9,7 +9,7 @@ Subject: [PATCH] do not test markdown with mupdf < 1.28.0
  1 file changed, 3 insertions(+)
 
 diff --git a/tests/test_markdown_support.py b/tests/test_markdown_support.py
-index a67c688c..9a1c34c0 100644
+index 0f7435ee..324e4794 100644
 --- a/tests/test_markdown_support.py
 +++ b/tests/test_markdown_support.py
 @@ -74,6 +74,9 @@ def test_markdown_style():
