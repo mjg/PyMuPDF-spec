@@ -156,12 +156,10 @@ SKIP="$SKIP and not test_4435"
 %endif
 # spuriously failing tests (several archs)
 SKIP="$SKIP and not test_insert and not test_3087"
-# tests apply to >= 1.27.x only
-%if %["%copr_projectname" == "mupdf-git-1.26.x"]
-SKIP="$SKIP and not test_4599 and not test_4790 and not test_4907"
-%endif
 # tests are known to fail on newer Fedoras (reported)
 SKIP="$SKIP and not test_layout and not test_pageids"
+# test depends on symbols in standard font
+SKIP="$SKIP and not test_markdown_bad_unicode"
 export PYMUPDF_SYSINSTALL_TEST=1
 %pytest -k "$SKIP"
 
