@@ -25,7 +25,6 @@ Source0:	{{{ GIT_DIRTY=1 git_pack path=source dir_name=PyMuPDF }}}
 # Fedora specific patches:
 Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
-Patch:		0001-setup.py-do-not-require-libclang-and-swig.patch
 Patch:		0001-tests-adjust-to-verbose-font-warning.patch
 Patch:		0001-adjust-tests-to-tesseract-5.5.1.patch
 Patch:		0001-tests-conftest-do-not-call-pip.patch
@@ -47,7 +46,6 @@ BuildRequires:	python3-furo
 BuildRequires:	rst2pdf
 %endif
 BuildRequires:	gcc gcc-c++
-BuildRequires:	swig
 BuildRequires:	zlib-devel
 BuildRequires:	mupdf-devel mupdf-cpp-devel
 BuildRequires:	freetype-devel
@@ -88,6 +86,7 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 sed -i -e "s/,'sphinxcontrib.googleanalytics'//" docs/conf.py
 
 %generate_buildrequires
+export PYMUPDF_SETUP_LIBCLANG='swig'
 %pyproject_buildrequires -R
 
 %build
