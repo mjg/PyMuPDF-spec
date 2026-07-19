@@ -1,5 +1,5 @@
-From 1fe5ba9b24df61585112bfba1e8185974e969b36 Mon Sep 17 00:00:00 2001
-Message-ID: <1fe5ba9b24df61585112bfba1e8185974e969b36.1782826325.git.mjg@fedoraproject.org>
+From a4d95819fe405a00ada1ec20cea289d95126db9a Mon Sep 17 00:00:00 2001
+Message-ID: <a4d95819fe405a00ada1ec20cea289d95126db9a.1784469692.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Thu, 11 May 2023 16:40:03 +0200
 Subject: [PATCH] test_pixmap: adjust to turbojpeg
@@ -25,5 +25,5 @@ index 9a89d32b..8f18f0a3 100644
  def test_memoryview():
      pm = pymupdf.Pixmap(imgfile)
 -- 
-2.55.0.rc2.784.gc71a16c163
+2.55.0.430.g36796e6be8
 

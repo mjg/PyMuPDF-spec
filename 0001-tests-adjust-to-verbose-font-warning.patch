@@ -1,5 +1,5 @@
-From d7f1a5b670494b332adab7aa6dd8b06c37fe4923 Mon Sep 17 00:00:00 2001
-Message-ID: <d7f1a5b670494b332adab7aa6dd8b06c37fe4923.1782826320.git.mjg@fedoraproject.org>
+From 38adc2bda4436a918e866d7ddab18d6b2eb0d8ae Mon Sep 17 00:00:00 2001
+Message-ID: <38adc2bda4436a918e866d7ddab18d6b2eb0d8ae.1784469689.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Wed, 4 Jun 2025 15:30:42 +0200
 Subject: [PATCH] tests: adjust to verbose font warning
@@ -25,15 +25,18 @@ index 170418a9..36778ee0 100644
      # has a non-empty intersection with the rectangle.
      chars = [
 diff --git a/tests/test_font.py b/tests/test_font.py
-index bfd6c635..066d4748 100644
+index ccbe12d3..e589cc27 100644
 --- a/tests/test_font.py
 +++ b/tests/test_font.py
-@@ -329,4 +329,4 @@ def test_4457():
+@@ -330,7 +330,7 @@ def test_4457():
      wt = pymupdf.TOOLS.mupdf_warnings()
      print(f'{wt=}')
      if pymupdf.mupdf_version_tuple < (1, 27):
 -        assert wt == 'bogus font ascent/descent values (0 / 0)\n... repeated 5 times...'
 +        assert 'bogus font ascent/descent values (0 / 0)' in wt
+ 
+ 
+ def test_5049():
 diff --git a/tests/test_pixmap.py b/tests/test_pixmap.py
 index 8f18f0a3..92305cec 100644
 --- a/tests/test_pixmap.py
@@ -62,5 +65,5 @@ index d42f9e65..ca390344 100644
  
  
 -- 
-2.55.0.rc2.784.gc71a16c163
+2.55.0.430.g36796e6be8
 

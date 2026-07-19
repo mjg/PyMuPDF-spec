@@ -1,5 +1,5 @@
-From 543d96ba63363e4addea4225fb072294816ddc65 Mon Sep 17 00:00:00 2001
-Message-ID: <543d96ba63363e4addea4225fb072294816ddc65.1782826329.git.mjg@fedoraproject.org>
+From 13f153faf141dbeb74ac7738856ec04d735ae31e Mon Sep 17 00:00:00 2001
+Message-ID: <13f153faf141dbeb74ac7738856ec04d735ae31e.1784469695.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Sat, 15 Apr 2023 17:53:27 +0200
 Subject: [PATCH] fix test_*font
@@ -39,5 +39,5 @@ index 0d729107..d4da7bee 100644
      bbox = font.glyph_bbox( 65)
      print( f'bbox={bbox!r}')
 -- 
-2.55.0.rc2.784.gc71a16c163
+2.55.0.430.g36796e6be8
 

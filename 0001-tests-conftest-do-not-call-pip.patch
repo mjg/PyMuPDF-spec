@@ -1,5 +1,5 @@
-From ee33463dd65fdf18795ef9d7ca139f52a36ceac6 Mon Sep 17 00:00:00 2001
-Message-ID: <ee33463dd65fdf18795ef9d7ca139f52a36ceac6.1782826316.git.mjg@fedoraproject.org>
+From 3cf05394db657986f73c2e0cf8008c99ff6ec982 Mon Sep 17 00:00:00 2001
+Message-ID: <3cf05394db657986f73c2e0cf8008c99ff6ec982.1784469684.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Sat, 1 Nov 2025 22:32:10 +0100
 Subject: [PATCH] tests/conftest: do not call pip
@@ -22,5 +22,5 @@ index 3c268c15..aa993a8d 100644
  
  @pytest.fixture(scope="session", autouse=True)
 -- 
-2.55.0.rc2.784.gc71a16c163
+2.55.0.430.g36796e6be8
 

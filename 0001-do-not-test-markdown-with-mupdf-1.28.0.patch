@@ -1,5 +1,5 @@
-From fbfa1d677578fb197cc953dad26264b327e33e99 Mon Sep 17 00:00:00 2001
-Message-ID: <fbfa1d677578fb197cc953dad26264b327e33e99.1782826308.git.mjg@fedoraproject.org>
+From 010b0aef5ba0218395dac2b082952737f77ce4cb Mon Sep 17 00:00:00 2001
+Message-ID: <010b0aef5ba0218395dac2b082952737f77ce4cb.1784469677.git.mjg@fedoraproject.org>
 From: Michael J Gruber <mjg@fedoraproject.org>
 Date: Fri, 26 Jun 2026 22:19:57 +0200
 Subject: [PATCH] do not test markdown with mupdf < 1.28.0
@@ -23,5 +23,5 @@ index 0f7435ee..324e4794 100644
              # title
              
 -- 
-2.55.0.rc2.784.gc71a16c163
+2.55.0.430.g36796e6be8
 
