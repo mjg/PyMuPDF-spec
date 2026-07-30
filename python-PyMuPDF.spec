@@ -32,6 +32,7 @@ Patch:		0001-tests-conftest-do-not-call-pip.patch
 # https://github.com/pymupdf/PyMuPDF/pull/5015
 Patch:		0001-remove-usage-of-typing.ByteString.patch
 Patch:		0001-do-not-test-markdown-with-mupdf-1.28.0.patch
+Patch:		0001-Replace-removed-Python-2-C-API-macros-for-SWIG-4.5.0.patch
 
 # test dependencies not picked up by generator
 BuildRequires:	python3dist(pillow)
