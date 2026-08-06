@@ -28,11 +28,15 @@ Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-tests-adjust-to-verbose-font-warning.patch
 Patch:		0001-adjust-tests-to-tesseract-5.5.1.patch
 Patch:		0001-tests-conftest-do-not-call-pip.patch
-# Upstreamable:
+# Suggested upstream:
 # https://github.com/pymupdf/PyMuPDF/pull/5015
 Patch:		0001-remove-usage-of-typing.ByteString.patch
-Patch:		0001-do-not-test-markdown-with-mupdf-1.28.0.patch
+# Replace removed Python 2 C API macros with Python 3 equivalents
+# for compatibility with SWIG 4.5.0
+# https://github.com/pymupdf/PyMuPDF/pull/5072
 Patch:		0001-Replace-removed-Python-2-C-API-macros-for-SWIG-4.5.0.patch
+# Upstreamable:
+Patch:		0001-do-not-test-markdown-with-mupdf-1.28.0.patch
 
 # test dependencies not picked up by generator
 BuildRequires:	python3dist(pillow)
@@ -52,6 +56,9 @@ BuildRequires:	mupdf-devel mupdf-cpp-devel
 BuildRequires:	freetype-devel
 BuildRequires:	python3-mupdf
 Buildrequires:	python3-mypy
+
+# https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
+ExcludeArch: %{ix86}
 
 %global _description %{expand:
 This is PyMuPDF, a Python binding for MuPDF - a lightweight PDF and XPS
