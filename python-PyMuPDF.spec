@@ -136,8 +136,8 @@ SKIP="$SKIP and not test_fit_springer"
 SKIP="$SKIP and not test_spikes and not test_5001"
 # these compare renderings with system fonts or missing fonts
 SKIP="$SKIP and not test_4180 and not test_4613 and not test_htmlbox1"
-# test downloads data from the internet
-SKIP="$SKIP and not test_4445 and not test_4457 and not test_4533 and not test_4702"
+# tests download data from the internet
+SKIP="$SKIP and not test_4445 and not test_4457 and not test_4533 and not test_4702 and not test_5082"
 # test requires additional packages
 SKIP="$SKIP and not test_4751"
 # Fedora's earlier swig may return different results
