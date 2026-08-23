@@ -31,10 +31,6 @@ Patch:		0001-tests-conftest-do-not-call-pip.patch
 # Suggested upstream:
 # https://github.com/pymupdf/PyMuPDF/pull/5015
 Patch:		0001-remove-usage-of-typing.ByteString.patch
-# Replace removed Python 2 C API macros with Python 3 equivalents
-# for compatibility with SWIG 4.5.0
-# https://github.com/pymupdf/PyMuPDF/pull/5072
-Patch:		0001-Replace-removed-Python-2-C-API-macros-for-SWIG-4.5.0.patch
 # Upstreamable:
 Patch:		0001-do-not-test-markdown-with-mupdf-1.28.0.patch
 
