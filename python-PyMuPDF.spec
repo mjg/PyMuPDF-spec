@@ -28,9 +28,6 @@ Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-tests-adjust-to-verbose-font-warning.patch
 Patch:		0001-adjust-tests-to-tesseract-5.5.1.patch
 Patch:		0001-tests-conftest-do-not-call-pip.patch
-# Suggested upstream:
-# https://github.com/pymupdf/PyMuPDF/pull/5015
-Patch:		0001-remove-usage-of-typing.ByteString.patch
 # Upstreamable:
 Patch:		0001-do-not-test-markdown-with-mupdf-1.28.0.patch
 
