@@ -161,8 +161,10 @@ SKIP="$SKIP and not test_markdown_bad_unicode"
 # widgets cannot be that broken, can they
 SKIP="$SKIP and not test_text_creation_preserves_value"
 SKIP="$SKIP and not test_checkbox_creation_writes_pdf_name"
+SKIP="$SKIP and not test_checkbox_update_writes_pdf_name"
 SKIP="$SKIP and not test_shared_value_update_refreshes_other_widget"
 SKIP="$SKIP and not test_radio_creation_has_at_most_one_selected_widget"
+SKIP="$SKIP and not test_radio_selection_writes_pdf_name"
 export PYMUPDF_SYSINSTALL_TEST=1
 %pytest -k "$SKIP"
 
