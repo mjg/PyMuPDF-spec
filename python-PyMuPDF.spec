@@ -27,8 +27,6 @@ Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-adjust-tests-to-tesseract-5.5.1.patch
 Patch:		0001-tests-conftest-do-not-call-pip.patch
-# Upstreamable:
-Patch:		0001-do-not-test-markdown-with-mupdf-1.28.0.patch
 
 # test dependencies not picked up by generator
 BuildRequires:	python3dist(pillow)
