@@ -25,7 +25,6 @@ Source0:	{{{ GIT_DIRTY=1 git_pack path=source dir_name=PyMuPDF }}}
 # Fedora specific patches:
 Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
-Patch:		0001-tests-adjust-to-verbose-font-warning.patch
 Patch:		0001-adjust-tests-to-tesseract-5.5.1.patch
 Patch:		0001-tests-conftest-do-not-call-pip.patch
 # Upstreamable:
