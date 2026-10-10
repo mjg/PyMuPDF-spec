@@ -92,8 +92,6 @@ export PYMUPDF_SETUP_LIBCLANG='swig'
 export PYMUPDF_SETUP_MUPDF_BUILD_TYPE='release'
 # build against system mupdf:
 export PYMUPDF_SETUP_MUPDF_BUILD=''
-# build rebased implementation only:
-export PYMUPDF_SETUP_IMPLEMENTATIONS='b'
 CFLAGS="$CFLAGS -I/usr/include -I/usr/include/freetype2 -I/usr/include/mupdf"
 LDFLAGS="$LDFLAGS -lfreetype -lmupdf"
 %pyproject_wheel
