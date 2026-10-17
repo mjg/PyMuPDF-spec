@@ -154,6 +154,8 @@ SKIP="$SKIP and not test_layout and not test_pageids"
 # test depends on symbols in standard font
 SKIP="$SKIP and not test_markdown_bad_unicode"
 export PYMUPDF_SYSINSTALL_ROOT=-
+export PYMUPDF_TEST_USE_LAYOUT=0
+export PYMUPDF_TEST_USE_4LLM=0
 %pytest -k "$SKIP"
 
 %files -n python3-%{pypi_name} -f %{pyproject_files}
