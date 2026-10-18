@@ -1,5 +1,5 @@
 ## Pull in upstream source:
-# {{{ git submodule update --init --recursive 1>&2; git submodule }}}
+# {{{ git submodule update --init --recursive 1>&2; git submodule status source }}}
 %global gitversion		{{{ git -C source rev-parse HEAD }}}
 %global gitshortversion		{{{ git -C source rev-parse --short HEAD }}}
 %global gitdescribefedversion	{{{ git -C source describe --tags --match '[0-9]*' | sed -e 's/^\(.*\)-\([0-9]*\)-g\(.*\)$/\1^\2.g\3/' }}}
@@ -21,12 +21,15 @@ URL:		https://github.com/pymupdf/PyMuPDF
 # rpkg's git_pack does not cope well with submodules, so we force it to assume a dirty tree.
 # The tree is unmodified (before possibly applying patches).
 Source0:	{{{ GIT_DIRTY=1 git_pack path=source dir_name=PyMuPDF }}}
+Source1:	{{{ GIT_DIRTY=1 git_pack path=source1 dir_name=PyMuPDF-Layout }}}
+Source2:	{{{ GIT_DIRTY=1 git_pack path=source2 dir_name=PyMuPDF4LLM }}}
 
 # Fedora specific patches:
 Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-adjust-tests-to-tesseract-5.5.1.patch
 Patch:		0001-tests-conftest-do-not-call-pip.patch
+Patch:		0001-Revert-setup.py-require-python-3.15-if-we-contain-la.patch
 
 # test dependencies not picked up by generator
 BuildRequires:	python3dist(pillow)
@@ -45,7 +48,8 @@ BuildRequires:	zlib-devel
 BuildRequires:	mupdf-devel mupdf-cpp-devel
 BuildRequires:	freetype-devel
 BuildRequires:	python3-mupdf
-Buildrequires:	python3-mypy
+BuildRequires:	python3-mypy
+BuildRequires:	git-core
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch: %{ix86}
@@ -79,15 +83,21 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %endif
 
 %prep
-%autosetup -n %{pypi_name} -p 1
+%autosetup -n %{pypi_name} -p 1 -S git
 # disable google analytics for installed doc
 sed -i -e "s/,'sphinxcontrib.googleanalytics'//" docs/conf.py
+%setup -T -D -n %{pypi_name} -a 1
+%setup -T -D -n %{pypi_name} -a 2
 
 %generate_buildrequires
+export PYMUPDF_SETUP_PATH_LAYOUT=PyMuPDF-Layout
+export PYMUPDF_SETUP_PATH_4LLM=PyMuPDF4LLM
 export PYMUPDF_SETUP_LIBCLANG='swig'
 %pyproject_buildrequires -R
 
 %build
+export PYMUPDF_SETUP_PATH_LAYOUT=PyMuPDF-Layout
+export PYMUPDF_SETUP_PATH_4LLM=PyMuPDF4LLM
 # generate debug symbols via FLAGS
 export PYMUPDF_SETUP_MUPDF_BUILD_TYPE='release'
 # build against system mupdf:
@@ -154,9 +164,7 @@ SKIP="$SKIP and not test_layout and not test_pageids"
 # test depends on symbols in standard font
 SKIP="$SKIP and not test_markdown_bad_unicode"
 export PYMUPDF_SYSINSTALL_ROOT=-
-export PYMUPDF_TEST_USE_LAYOUT=0
-export PYMUPDF_TEST_USE_4LLM=0
-%pytest -k "$SKIP"
+%pytest -k "$SKIP" tests/
 
 %files -n python3-%{pypi_name} -f %{pyproject_files}
 %license COPYING
