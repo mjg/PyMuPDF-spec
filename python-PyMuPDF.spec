@@ -51,7 +51,7 @@ Buildrequires:	python3-mypy
 ExcludeArch: %{ix86}
 
 %global _description %{expand:
-This is PyMuPDF, a Python binding for MuPDF - a lightweight PDF and XPS
+This is PyMuPDF-lite, a Python binding for MuPDF - a lightweight PDF and XPS
 viewer. MuPDF can access files in PDF, XPS, OpenXPS, epub, comic and fiction
 book formats, and it is known for its top performance and high rendering
 quality. With PyMuPDF you therefore can also access files with extensions
@@ -161,10 +161,11 @@ export PYMUPDF_TEST_USE_4LLM=0
 %files -n python3-%{pypi_name} -f %{pyproject_files}
 %license COPYING
 %{_bindir}/pymupdf
+%{_bindir}/pymupdf-config
 
 %if %{with docs}
 %files doc
-%doc docs_built/* README.md
+%doc docs_built/* README-lite.md
 %endif
 
 %changelog
