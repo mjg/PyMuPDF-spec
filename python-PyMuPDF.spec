@@ -30,6 +30,7 @@ Patch:		0001-adjust-tests-to-tesseract-5.5.1.patch
 # test dependencies not picked up by generator
 BuildRequires:	python3dist(pillow)
 BuildRequires:	python3dist(pytest)
+BuildRequires:	python3dist(pytest-asyncio)
 BuildRequires:	python3dist(psutil)
 BuildRequires:	tesseract-langpack-eng
 %if %{with docs}
