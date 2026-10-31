@@ -28,13 +28,17 @@ Source2:	{{{ GIT_DIRTY=1 git_pack path=source2 dir_name=PyMuPDF4LLM }}}
 Patch:		0001-fix-test_-font.patch
 Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-adjust-tests-to-tesseract-5.5.1.patch
-Patch:		0001-tests-conftest-do-not-call-pip.patch
-Patch:		0001-Revert-setup.py-require-python-3.15-if-we-contain-la.patch
 
 # test dependencies not picked up by generator
+BuildRequires:	python3dist(networkx)
+BuildRequires:	python3dist(numpy)
+Buildrequires:	python3dist(onnxruntime)
 BuildRequires:	python3dist(pillow)
 BuildRequires:	python3dist(pytest)
+BuildRequires:	python3dist(pytest-asyncio)
 BuildRequires:	python3dist(psutil)
+BuildRequires:	python3dist(pyyaml)
+BuildRequires:	python3dist(tabulate)
 BuildRequires:	tesseract-langpack-eng
 %if %{with docs}
 BuildRequires:	python3-sphinx
@@ -88,6 +92,13 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 sed -i -e "s/,'sphinxcontrib.googleanalytics'//" docs/conf.py
 %setup -T -D -n %{pypi_name} -a 1
 %setup -T -D -n %{pypi_name} -a 2
+git add --force .
+GIT_COMMITTER_DATE=%{__scm_source_timestamp} GIT_AUTHOR_DATE=%{__scm_source_timestamp} git commit --no-gpg-sign -m OhWell --author "%{__scm_author}"
+# These are part of the package but not proper packages themselves,
+# which is why we do not "provide" the. Upstream depends on empty stubs
+# to work around pip upgrade limitations which we do not face:
+%pyproject_patch_dependency pymupdf-layout:ignore
+%pyproject_patch_dependency pymupdf4llm:ignore
 
 %generate_buildrequires
 export PYMUPDF_SETUP_PATH_LAYOUT=PyMuPDF-Layout
@@ -111,7 +122,7 @@ sphinx-build docs docs_built
 
 %install
 %pyproject_install
-%pyproject_save_files -L %{module_name} %{module_name_compat}
+%pyproject_save_files -L %{module_name} %{module_name_compat} pymupdf4llm
 
 %check
 # linters have no place in distro build tests
@@ -169,6 +180,7 @@ export PYMUPDF_SYSINSTALL_ROOT=-
 %files -n python3-%{pypi_name} -f %{pyproject_files}
 %license COPYING
 %{_bindir}/pymupdf
+%{_bindir}/pymupdf-config
 
 %if %{with docs}
 %files doc
