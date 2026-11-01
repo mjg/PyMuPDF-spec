@@ -45,7 +45,7 @@ BuildRequires:	zlib-devel
 BuildRequires:	mupdf-devel mupdf-cpp-devel
 BuildRequires:	freetype-devel
 BuildRequires:	python3-mupdf
-Buildrequires:	python3-mypy
+BuildRequires:	python3-mypy
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch: %{ix86}
