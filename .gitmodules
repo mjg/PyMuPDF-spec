@@ -2,3 +2,11 @@
 	path = source
 	url = https://github.com/pymupdf/PyMuPDF
 	branch = main
+[submodule "source1"]
+	path = source1
+	url = github:ArtifexSoftware/pymupdf_layout
+	branch = main
+[submodule "source2"]
+	path = source2
+	url = github:pymupdf/pymupdf4llm
+	branch = main
