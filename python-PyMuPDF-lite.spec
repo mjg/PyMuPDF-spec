@@ -4,7 +4,8 @@
 %global gitshortversion		{{{ git -C source rev-parse --short HEAD }}}
 %global gitdescribefedversion	{{{ git -C source describe --tags --match '[0-9]*' | sed -e 's/^\(.*\)-\([0-9]*\)-g\(.*\)$/\1^\2.g\3/' }}}
 
-%global pypi_name PyMuPDF
+%global pypi_name PyMuPDF-lite
+%global source_name PyMuPDF
 %global module_name pymupdf
 %global module_name_compat fitz
 
@@ -79,7 +80,7 @@ python-%{pypi_name}-doc contains documentation and examples for PyMuPDF
 %endif
 
 %prep
-%autosetup -n %{pypi_name} -p 1
+%autosetup -n %{source_name} -p 1
 # disable google analytics for installed doc
 sed -i -e "s/,'sphinxcontrib.googleanalytics'//" docs/conf.py
 
