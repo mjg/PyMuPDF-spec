@@ -1,5 +1,5 @@
 ## Pull in upstream source:
-# {{{ git submodule update --init --recursive 1>&2; git submodule }}}
+# {{{ git submodule update --init --recursive 1>&2; git submodule status source }}}
 %global gitversion		{{{ git -C source rev-parse HEAD }}}
 %global gitshortversion		{{{ git -C source rev-parse --short HEAD }}}
 %global gitdescribefedversion	{{{ git -C source describe --tags --match '[0-9]*' | sed -e 's/^\(.*\)-\([0-9]*\)-g\(.*\)$/\1^\2.g\3/' }}}
