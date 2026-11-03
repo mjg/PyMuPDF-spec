@@ -4,9 +4,9 @@
 	branch = main
 [submodule "source1"]
 	path = source1
-	url = github:ArtifexSoftware/pymupdf_layout
+	url = https://github.com/ArtifexSoftware/pymupdf_layout
 	branch = main
 [submodule "source2"]
 	path = source2
-	url = github:pymupdf/pymupdf4llm
+	url = https://github.com/pymupdf/pymupdf4llm
 	branch = main
