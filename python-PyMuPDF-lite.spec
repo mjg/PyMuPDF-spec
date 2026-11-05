@@ -29,6 +29,7 @@ Patch:		0001-test_pixmap-adjust-to-turbojpeg.patch
 Patch:		0001-adjust-tests-to-tesseract-5.5.1.patch
 
 # test dependencies not picked up by generator
+Buildrequires:	python3dist(pandas)
 BuildRequires:	python3dist(pillow)
 BuildRequires:	python3dist(pytest)
 BuildRequires:	python3dist(pytest-asyncio)
