@@ -96,7 +96,7 @@ sed -i -e "s/,'sphinxcontrib.googleanalytics'//" docs/conf.py
 git add --force .
 GIT_COMMITTER_DATE=%{__scm_source_timestamp} GIT_AUTHOR_DATE=%{__scm_source_timestamp} git commit --no-gpg-sign -m OhWell --author "%{__scm_author}"
 # These are part of the package but not proper packages themselves,
-# which is why we do not "provide" the. Upstream depends on empty stubs
+# which is why we do not "provide" them. Upstream depends on empty stubs
 # to work around pip upgrade limitations which we do not face:
 %pyproject_patch_dependency pymupdf-layout:ignore
 %pyproject_patch_dependency pymupdf4llm:ignore
